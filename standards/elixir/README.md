@@ -5,9 +5,10 @@ like `mix format` and Credo cannot, and they guide the Credo checks we add per r
 
 ## Conventions
 
-- [Testing](testing/) - property testing and unit testing patterns.
+- [Property testing](property-testing.md)
+- [Unit testing](unit-testing.md) - tags, context, and DRY test patterns.
 - [Application configuration](application-configuration.md)
 - [Control structures](control-structures.md)
 - [Modules](modules.md) - namespacing, aliasing, and single responsibility.
 
-Umbrella app design is planned and not yet written.
+Planned, not yet authored: naming, idioms, principles, anti-patterns. Umbrella app design.
