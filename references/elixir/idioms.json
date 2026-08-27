@@ -34,7 +34,9 @@
     },
     {
       "name": "Build Collections In One Pass",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/gql_interface/pull/481#discussion_r3149904738",
@@ -505,7 +507,9 @@
     },
     {
       "name": "Decimal From String",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/tax_calculator/pull/222#discussion_r2620157811",
@@ -616,7 +620,9 @@
     },
     {
       "name": "At Most Three Positional Parameters",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/audit_service/pull/58#discussion_r2941218896",
@@ -1328,7 +1334,9 @@
     },
     {
       "name": "Verified Route Sigils",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/client_management_dashboard/pull/178#discussion_r2947864390",

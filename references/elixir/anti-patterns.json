@@ -4,7 +4,9 @@
   "rules": [
     {
       "name": "Atoms From External Input",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/audit_service/pull/18#discussion_r2138371850",
@@ -46,7 +48,9 @@
     },
     {
       "name": "Catch All Utils Modules",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/cb_relay/pull/45#discussion_r1794121333",
@@ -160,7 +164,9 @@
     },
     {
       "name": "Else Clauses On With",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/audit_service/pull/43#discussion_r2399082104",
@@ -388,7 +394,9 @@
     },
     {
       "name": "Bare String Error Reasons",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/file_lookup_service/pull/381#discussion_r1281039854",
@@ -583,7 +591,9 @@
     },
     {
       "name": "Calling Mix Env At Runtime",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/schedule_service/pull/399#discussion_r2635709127",
@@ -784,7 +794,9 @@
     },
     {
       "name": "Leaving TODO Comments",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/invoice_service/pull/368#discussion_r1539914258",
@@ -1012,7 +1024,9 @@
     },
     {
       "name": "Dispatching On Later Arguments",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/payment_api/pull/1155#discussion_r2150849146",

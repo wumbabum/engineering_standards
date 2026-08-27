@@ -115,7 +115,9 @@
     },
     {
       "name": "Remove Unused And Redundant Aliases",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/file_lookup_service/pull/487#discussion_r2449210043",
@@ -154,7 +156,9 @@
     },
     {
       "name": "Module Name Matches File Path",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/graphql_service/pull/629#discussion_r3639649593",
@@ -610,7 +614,9 @@
     },
     {
       "name": "Order Private Functions Below Public",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/518#discussion_r1297363424",
@@ -644,7 +650,8 @@
     {
       "name": "Strict Module Directive Layout",
       "tags": [
-        "credo"
+        "credo",
+        "lint-enforceable"
       ],
       "references": [
         {
@@ -723,7 +730,9 @@
     },
     {
       "name": "Alias Before Importing Same Module",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/tax_calculator/pull/231#discussion_r3016965121",
@@ -738,7 +747,9 @@
     },
     {
       "name": "Separate Special Attributes With Blank Lines",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/invoice_service/pull/382#discussion_r1643311842",
@@ -762,7 +773,9 @@
     },
     {
       "name": "Separate Plug From Alias Directives",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/575#discussion_r1795677364",
@@ -822,7 +835,9 @@
     },
     {
       "name": "Name Callback Spec Parameters",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/payment_api/pull/1155#discussion_r2150854509",
@@ -837,7 +852,9 @@
     },
     {
       "name": "Do Not Repeat Callback Specs",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/file_lookup_service/pull/469#discussion_r2195789014",
@@ -852,7 +869,9 @@
     },
     {
       "name": "Write Full Behaviour Module Name",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/bank_account_service/pull/258#discussion_r1600527845",
@@ -894,7 +913,9 @@
     },
     {
       "name": "Document Only Public Functions",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/cb_relay/pull/14#discussion_r1524958942",
@@ -1152,7 +1173,9 @@
     },
     {
       "name": "No Blank Line Before Function",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/615#discussion_r2519962392",
@@ -1227,7 +1250,9 @@
     },
     {
       "name": "Remove Unused Require Statements",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/payment_api/pull/1260#discussion_r3508173988",

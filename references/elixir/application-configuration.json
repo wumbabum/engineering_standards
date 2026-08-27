@@ -103,7 +103,9 @@
     },
     {
       "name": "System Env Calls In Runtime",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/imp_backend/pull/1969#discussion_r3093822967",
@@ -154,7 +156,9 @@
     },
     {
       "name": "Never Branch On Mix Env",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/client_management_dashboard/pull/131#discussion_r1478717471",
@@ -331,7 +335,9 @@
     },
     {
       "name": "Defaults For Optional Config",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/630#discussion_r3229523304",
@@ -652,7 +658,9 @@
     },
     {
       "name": "Never Set A Key Twice",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/device_payment_service/pull/56#discussion_r1783483205",
@@ -667,7 +675,9 @@
     },
     {
       "name": "Alphabetize Configuration Entries",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/imp_backend/pull/1985#discussion_r3269528117",
@@ -846,7 +856,9 @@
     },
     {
       "name": "Configure Logger Backends Explicitly",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/client_management_dashboard/pull/170#discussion_r2732556508",

@@ -739,7 +739,9 @@
     },
     {
       "name": "Avoid Single Step Pipelines",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/audit_service/pull/39#discussion_r2379911874",
@@ -793,7 +795,9 @@
     },
     {
       "name": "Flatten Nested Control Flow",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/device_payment_service/pull/160#discussion_r2861613131",

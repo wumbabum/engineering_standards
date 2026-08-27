@@ -4,7 +4,9 @@
   "rules": [
     {
       "name": "Snake Case For Identifiers",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/audit_service/pull/23#discussion_r2223746232",
@@ -28,7 +30,9 @@
     },
     {
       "name": "Capitalize Acronyms As Units",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/cb_audit/pull/1#discussion_r2078302807",
@@ -193,7 +197,9 @@
     },
     {
       "name": "Question Mark For Booleans",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/file_lookup_service/pull/408#discussion_r1520021842",

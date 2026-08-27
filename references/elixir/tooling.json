@@ -255,7 +255,9 @@
     },
     {
       "name": "Set Consistent Line Length",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/file_lookup_service/pull/422#discussion_r1598684801",
@@ -353,7 +355,9 @@
     },
     {
       "name": "Enable Dbg Warning Check",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/cb_pos_bridge/pull/84#discussion_r1633454237",
@@ -597,7 +601,9 @@
     },
     {
       "name": "End Files With Newline",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/cb_audit/pull/1#discussion_r2077973448",

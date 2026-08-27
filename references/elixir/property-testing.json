@@ -628,7 +628,9 @@
     },
     {
       "name": "Inline Generators And Remove Unused Bindings",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/audit_service/pull/30#discussion_r2307808699",
@@ -652,7 +654,9 @@
     },
     {
       "name": "Name Property Only With Check All",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/device_payment_service/pull/80#discussion_r1842427132",

@@ -967,7 +967,9 @@
     },
     {
       "name": "Rely On Default Failure Messages",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/631#discussion_r3190238115",
@@ -1641,7 +1643,9 @@
     },
     {
       "name": "Return Keyword List From Setup",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/file_lookup_service/pull/471#discussion_r2245717721",
@@ -3031,7 +3035,9 @@
     },
     {
       "name": "Use Verified Routes Everywhere",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/cb_pos_bridge/pull/114#discussion_r3320282878",
@@ -3046,7 +3052,9 @@
     },
     {
       "name": "Do Not Commit Focus Tags",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/invoice_service/pull/382#discussion_r1643313866",
@@ -3061,7 +3069,9 @@
     },
     {
       "name": "Name Test Files Exs",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/file_lookup_service/pull/431#discussion_r1697513897",
@@ -3076,7 +3086,9 @@
     },
     {
       "name": "Remove Unused Test Bindings",
-      "tags": [],
+      "tags": [
+        "lint-enforceable"
+      ],
       "references": [
         {
           "comment_url": "https://github.com/CityBaseInc/payment_api/pull/1074#discussion_r1622956747",
