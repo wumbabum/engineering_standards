@@ -1,0 +1,1212 @@
+{
+  "schema_version": 3,
+  "doc": "standards/elixir/anti-patterns.md",
+  "rules": [
+    {
+      "name": "Atoms From External Input",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/audit_service/pull/18#discussion_r2138371850",
+          "repo": "audit_service",
+          "pr_number": 18,
+          "author": "jdfrens",
+          "path": "apps/core/test/support/generator.ex",
+          "line": 171,
+          "created_at": "2025-06-10T16:55:11Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/cb_relay/pull/75#discussion_r2784989619",
+          "repo": "cb_relay",
+          "pr_number": 75,
+          "author": "davidtimmons",
+          "path": "test/manual/get_dps_devices/request.exs",
+          "line": 26,
+          "created_at": "2026-02-09T23:11:55Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/invoice_service/pull/382#discussion_r1643336014",
+          "repo": "invoice_service",
+          "pr_number": 382,
+          "author": "jdfrens",
+          "path": "apps/web/lib/web/controllers/accela_invoice_conroller.ex",
+          "line": 56,
+          "created_at": "2024-06-17T19:25:01Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/payment_api/pull/1082#discussion_r1655027938",
+          "repo": "payment_api",
+          "pr_number": 1082,
+          "author": "jdfrens",
+          "path": "apps/payment/lib/payment/ghenghis_utils.ex",
+          "line": 304,
+          "created_at": "2024-06-26T14:50:12Z"
+        }
+      ]
+    },
+    {
+      "name": "Catch All Utils Modules",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/cb_relay/pull/45#discussion_r1794121333",
+          "repo": "cb_relay",
+          "pr_number": 45,
+          "author": "jdfrens",
+          "path": "test/support/payment_api_test_helpers.ex",
+          "line": 1,
+          "created_at": "2024-10-09T19:28:33Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/cb_relay/pull/67#discussion_r2611539991",
+          "repo": "cb_relay",
+          "pr_number": 67,
+          "author": "jdfrens",
+          "path": "test/support/bypass.ex",
+          "line": 1,
+          "created_at": "2025-12-11T17:55:08Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/client_management_dashboard/pull/169#discussion_r2695564329",
+          "repo": "client_management_dashboard",
+          "pr_number": 169,
+          "author": "jdfrens",
+          "path": "apps/core/lib/core/utils.ex",
+          "line": 1,
+          "created_at": "2026-01-15T18:49:28Z"
+        }
+      ]
+    },
+    {
+      "name": "Macros To Vary Behavior",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/device_payment_service/pull/29#discussion_r1651480932",
+          "repo": "device_payment_service",
+          "pr_number": 29,
+          "author": "jdfrens",
+          "path": "apps/core/lib/core/vendor/datacap.ex",
+          "line": 48,
+          "created_at": "2024-06-24T18:51:59Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/device_payment_service/pull/29#discussion_r1651527635",
+          "repo": "device_payment_service",
+          "pr_number": 29,
+          "author": "spearce-citybase",
+          "path": "apps/core/lib/core/vendor/datacap.ex",
+          "line": 48,
+          "created_at": "2024-06-24T19:36:39Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/device_payment_service/pull/97#discussion_r1887168001",
+          "repo": "device_payment_service",
+          "pr_number": 97,
+          "author": "jdfrens",
+          "path": "apps/core/lib/core/vendor/datacap.ex",
+          "line": 48,
+          "created_at": "2024-12-16T16:49:22Z"
+        }
+      ]
+    },
+    {
+      "name": "Long Using Macros",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/device_payment_service/pull/29#discussion_r1651488973",
+          "repo": "device_payment_service",
+          "pr_number": 29,
+          "author": "jdfrens",
+          "path": "apps/core/lib/core/vendor/datacap.ex",
+          "line": 48,
+          "created_at": "2024-06-24T18:59:26Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/device_payment_service/pull/29#discussion_r1651509286",
+          "repo": "device_payment_service",
+          "pr_number": 29,
+          "author": "jdfrens",
+          "path": "apps/core/lib/core/vendor/datacap.ex",
+          "line": 25,
+          "created_at": "2024-06-24T19:16:50Z"
+        }
+      ]
+    },
+    {
+      "name": "Inheritance Style Base Modules",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/device_payment_service/pull/23#discussion_r1646388388",
+          "repo": "device_payment_service",
+          "pr_number": 23,
+          "author": "spearce-citybase",
+          "path": "apps/core/lib/core/clients/base.ex",
+          "line": 1,
+          "created_at": "2024-06-19T15:25:17Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/device_payment_service/pull/29#discussion_r1651500492",
+          "repo": "device_payment_service",
+          "pr_number": 29,
+          "author": "jdfrens",
+          "path": "apps/core/lib/core/vendor/datacap.ex",
+          "line": 48,
+          "created_at": "2024-06-24T19:09:20Z"
+        }
+      ]
+    },
+    {
+      "name": "Else Clauses On With",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/audit_service/pull/43#discussion_r2399082104",
+          "repo": "audit_service",
+          "pr_number": 43,
+          "author": "jdfrens",
+          "path": "apps/dispatch/lib/dispatch/workers/create_entry_worker.ex",
+          "line": 115,
+          "created_at": "2025-10-02T14:44:33Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/imp_backend/pull/1969#discussion_r3094150750",
+          "repo": "imp_backend",
+          "pr_number": 1969,
+          "author": "jdfrens",
+          "path": "lib/imp_backend_web/controllers/api/v1/rescue_document_controller.ex",
+          "line": 33,
+          "created_at": "2026-04-16T14:55:36Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/payment_api/pull/1216#discussion_r2849706942",
+          "repo": "payment_api",
+          "pr_number": 1216,
+          "author": "jdfrens",
+          "path": "apps/dispatch/lib/dispatch/workers/backfill_card_type_for_instrument_worker.ex",
+          "line": 40,
+          "created_at": "2026-02-24T21:45:34Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/518#discussion_r1297618338",
+          "repo": "user_management_service",
+          "pr_number": 518,
+          "author": "spearce-citybase",
+          "path": "apps/service_tasks/lib/service_tasks/okta.ex",
+          "line": 79,
+          "created_at": "2023-08-17T18:54:05Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/575#discussion_r1795690620",
+          "repo": "user_management_service",
+          "pr_number": 575,
+          "author": "jdfrens",
+          "path": "apps/web/lib/web/controllers/password_reset_key_controller.ex",
+          "line": 39,
+          "created_at": "2024-10-10T15:36:31Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/603#discussion_r2379625703",
+          "repo": "user_management_service",
+          "pr_number": 603,
+          "author": "jdfrens",
+          "path": "apps/web/lib/web/controllers/sso/person_controller.ex",
+          "line": 61,
+          "created_at": "2025-09-25T15:54:02Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/628#discussion_r3087200573",
+          "repo": "user_management_service",
+          "pr_number": 628,
+          "author": "wumbabum",
+          "path": "apps/event_bus/lib/event_bus/subscribers/update_profile_verification_key.ex",
+          "line": 87,
+          "created_at": "2026-04-15T14:26:49Z"
+        }
+      ]
+    },
+    {
+      "name": "Logger Inside Logger Backend",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/airbrake_client/pull/36#discussion_r3053111250",
+          "repo": "airbrake_client",
+          "pr_number": 36,
+          "author": "jdfrens",
+          "path": "lib/airbrake/notice.ex",
+          "line": 20,
+          "created_at": "2026-04-08T17:37:08Z"
+        }
+      ]
+    },
+    {
+      "name": "Wrapping Logger In Helper",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/device_payment_service/pull/44#discussion_r1745796112",
+          "repo": "device_payment_service",
+          "pr_number": 44,
+          "author": "jdfrens",
+          "path": "apps/core/lib/core/vendor/datacap.ex",
+          "line": 115,
+          "created_at": "2024-09-05T15:50:20Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/device_payment_service/pull/44#discussion_r1745815824",
+          "repo": "device_payment_service",
+          "pr_number": 44,
+          "author": "wumbabum",
+          "path": "apps/core/lib/core/vendor/datacap.ex",
+          "line": 115,
+          "created_at": "2024-09-05T16:03:54Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/file_lookup_service/pull/418#discussion_r1592538679",
+          "repo": "file_lookup_service",
+          "pr_number": 418,
+          "author": "jdfrens",
+          "path": "apps/core/lib/core/ingest/file_transfer/sftp.ex",
+          "line": 77,
+          "created_at": "2024-05-07T14:00:49Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/gql_interface/pull/479#discussion_r2954525849",
+          "repo": "gql_interface",
+          "pr_number": 479,
+          "author": "jdfrens",
+          "path": "lib/gql_interface/logger.ex",
+          "line": 1,
+          "created_at": "2026-03-18T16:00:25Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/tax_calculator/pull/230#discussion_r2955214088",
+          "repo": "tax_calculator",
+          "pr_number": 230,
+          "author": "wumbabum",
+          "path": "apps/core/lib/core/schedule.ex",
+          "line": 106,
+          "created_at": "2026-03-18T17:50:35Z"
+        }
+      ]
+    },
+    {
+      "name": "Logging Full External Responses",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/device_payment_service/pull/160#discussion_r2880353539",
+          "repo": "device_payment_service",
+          "pr_number": 160,
+          "author": "davidtimmons",
+          "path": "apps/core/lib/core/ghenghis_api.ex",
+          "line": 486,
+          "created_at": "2026-03-03T20:35:03Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/device_payment_service/pull/174#discussion_r3382936739",
+          "repo": "device_payment_service",
+          "pr_number": 174,
+          "author": "davidtimmons",
+          "path": "apps/core/lib/core/vendor/datacap.ex",
+          "line": 628,
+          "created_at": "2026-06-09T18:25:13Z"
+        }
+      ]
+    },
+    {
+      "name": "Inspecting Structs Into Logs",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/file_lookup_service/pull/469#discussion_r2205278924",
+          "repo": "file_lookup_service",
+          "pr_number": 469,
+          "author": "jdfrens",
+          "path": "apps/core/lib/oas/api/obligation_association_api_impl.ex",
+          "line": 96,
+          "created_at": "2025-07-14T15:58:09Z"
+        }
+      ]
+    },
+    {
+      "name": "Logging Already Logged Errors",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/device_payment_service/pull/114#discussion_r1919406572",
+          "repo": "device_payment_service",
+          "pr_number": 114,
+          "author": "wumbabum",
+          "path": "apps/core/lib/core/work/report_payment_ghenghis_worker.ex",
+          "line": 37,
+          "created_at": "2025-01-17T00:37:40Z"
+        }
+      ]
+    },
+    {
+      "name": "Extracting Logging Functions",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/file_lookup_service/pull/469#discussion_r2205257563",
+          "repo": "file_lookup_service",
+          "pr_number": 469,
+          "author": "jdfrens",
+          "path": "apps/core/lib/oas/api/obligation_association_api_impl.ex",
+          "line": 98,
+          "created_at": "2025-07-14T15:46:56Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/payment_api/pull/1158#discussion_r2178524793",
+          "repo": "payment_api",
+          "pr_number": 1158,
+          "author": "jdfrens",
+          "path": "apps/event_bus/lib/event_bus/subscribers/submit_payment.ex",
+          "line": 125,
+          "created_at": "2025-07-01T21:09:28Z"
+        }
+      ]
+    },
+    {
+      "name": "Logger Metadata As Data",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/file_lookup_service/pull/515#discussion_r3342027717",
+          "repo": "file_lookup_service",
+          "pr_number": 515,
+          "author": "jdfrens",
+          "path": "apps/core/lib/core/ingest/client_notifier.ex",
+          "line": 33,
+          "created_at": "2026-06-02T14:35:18Z"
+        }
+      ]
+    },
+    {
+      "name": "Bare String Error Reasons",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/file_lookup_service/pull/381#discussion_r1281039854",
+          "repo": "file_lookup_service",
+          "pr_number": 381,
+          "author": "jdfrens",
+          "path": "apps/core/lib/core/api/account_bill.ex",
+          "line": 100,
+          "created_at": "2023-08-01T19:03:21Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/gql_interface/pull/476#discussion_r2853862189",
+          "repo": "gql_interface",
+          "pr_number": 476,
+          "author": "jdfrens",
+          "path": "lib/gql_interface/common.ex",
+          "line": 204,
+          "created_at": "2026-02-25T15:50:47Z"
+        }
+      ]
+    },
+    {
+      "name": "Result Tuples As Arguments",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/file_lookup_service/pull/469#discussion_r2205243294",
+          "repo": "file_lookup_service",
+          "pr_number": 469,
+          "author": "jdfrens",
+          "path": "apps/core/lib/oas/api/obligation_association_api_impl.ex",
+          "line": 59,
+          "created_at": "2025-07-14T15:39:55Z"
+        }
+      ]
+    },
+    {
+      "name": "Defensive Code And Assertions",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/audit_service/pull/13#discussion_r2098456308",
+          "repo": "audit_service",
+          "pr_number": 13,
+          "author": "jdfrens",
+          "path": "apps/api/lib/api.ex",
+          "line": 28,
+          "created_at": "2025-05-20T16:53:54Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/file_lookup_service/pull/469#discussion_r2211265155",
+          "repo": "file_lookup_service",
+          "pr_number": 469,
+          "author": "wumbabum",
+          "path": "apps/web/lib/web/controllers/obligation_association_controller.ex",
+          "line": 245,
+          "created_at": "2025-07-16T18:32:35Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/603#discussion_r2379634712",
+          "repo": "user_management_service",
+          "pr_number": 603,
+          "author": "jdfrens",
+          "path": "apps/web/lib/web/views/sso/person_view.ex",
+          "line": 35,
+          "created_at": "2025-09-25T15:57:32Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/603#discussion_r2379635185",
+          "repo": "user_management_service",
+          "pr_number": 603,
+          "author": "jdfrens",
+          "path": "apps/web/lib/web/views/sso/person_view.ex",
+          "line": 38,
+          "created_at": "2025-09-25T15:57:43Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/603#discussion_r2379637403",
+          "repo": "user_management_service",
+          "pr_number": 603,
+          "author": "jdfrens",
+          "path": "apps/web/lib/web/views/sso/person_view.ex",
+          "line": 41,
+          "created_at": "2025-09-25T15:58:29Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/603#discussion_r2380077196",
+          "repo": "user_management_service",
+          "pr_number": 603,
+          "author": "jdfrens",
+          "path": "apps/web/lib/web/controllers/sso/person_controller.ex",
+          "line": 87,
+          "created_at": "2025-09-25T19:06:07Z"
+        }
+      ]
+    },
+    {
+      "name": "Try Rescue And Throw Catch",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/device_payment_service/pull/164#discussion_r2966789961",
+          "repo": "device_payment_service",
+          "pr_number": 164,
+          "author": "wumbabum",
+          "path": "apps/core/lib/core/work/report_payment_ghenghis_worker.ex",
+          "line": 115,
+          "created_at": "2026-03-20T16:37:39Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/file_lookup_service/pull/515#discussion_r3341945549",
+          "repo": "file_lookup_service",
+          "pr_number": 515,
+          "author": "jdfrens",
+          "path": "apps/core/lib/core/ingest/client_notifier.ex",
+          "line": 98,
+          "created_at": "2026-06-02T14:24:36Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/file_lookup_service/pull/515#discussion_r3341976541",
+          "repo": "file_lookup_service",
+          "pr_number": 515,
+          "author": "jdfrens",
+          "path": "apps/core/lib/core/ingest/client_notifier.ex",
+          "line": 67,
+          "created_at": "2026-06-02T14:28:26Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/payment_api/pull/1155#discussion_r2157364476",
+          "repo": "payment_api",
+          "pr_number": 1155,
+          "author": "jdfrens",
+          "path": "apps/payment/lib/payment/gateways/captcha.ex",
+          "line": 68,
+          "created_at": "2025-06-19T16:24:53Z"
+        }
+      ]
+    },
+    {
+      "name": "Returning Ok On Failure",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/628#discussion_r3087220719",
+          "repo": "user_management_service",
+          "pr_number": 628,
+          "author": "wumbabum",
+          "path": "apps/event_bus/lib/event_bus/subscribers/update_profile_verification_key.ex",
+          "line": 87,
+          "created_at": "2026-04-15T14:29:49Z"
+        }
+      ]
+    },
+    {
+      "name": "Special Casing Error Handling",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/schedule_service/pull/351#discussion_r1769076360",
+          "repo": "schedule_service",
+          "pr_number": 351,
+          "author": "jdfrens",
+          "path": "apps/event_bus/lib/event_bus/orchestrators/common/fetcher.ex",
+          "line": 132,
+          "created_at": "2024-09-20T19:07:54Z"
+        }
+      ]
+    },
+    {
+      "name": "Library Config Via Application",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/cb_auth/pull/13#discussion_r2372701165",
+          "repo": "cb_auth",
+          "pr_number": 13,
+          "author": "jdfrens",
+          "path": "config/config.exs",
+          "line": 1,
+          "created_at": "2025-09-23T15:24:02Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/cb_pos_bridge/pull/122#discussion_r3685523884",
+          "repo": "cb_pos_bridge",
+          "pr_number": 122,
+          "author": "wumbabum",
+          "path": "lib/cb_pos_bridge/feature_flags.ex",
+          "line": 47,
+          "created_at": "2026-07-30T19:08:42Z"
+        }
+      ]
+    },
+    {
+      "name": "Calling Mix Env At Runtime",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/schedule_service/pull/399#discussion_r2635709127",
+          "repo": "schedule_service",
+          "pr_number": 399,
+          "author": "jdfrens",
+          "path": "apps/web/lib/web/application.ex",
+          "line": 10,
+          "created_at": "2025-12-19T16:52:14Z"
+        }
+      ]
+    },
+    {
+      "name": "Concise and Necessary Comments Only",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/630#discussion_r3235740503",
+          "repo": "user_management_service",
+          "pr_number": 630,
+          "author": "jdfrens",
+          "path": "apps/core/lib/core/api/okta.ex",
+          "line": 149,
+          "created_at": "2026-05-13T16:07:24Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/630#discussion_r3235746698",
+          "repo": "user_management_service",
+          "pr_number": 630,
+          "author": "jdfrens",
+          "path": "apps/core/lib/core/api/okta.ex",
+          "line": 313,
+          "created_at": "2026-05-13T16:08:16Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/630#discussion_r3235828415",
+          "repo": "user_management_service",
+          "pr_number": 630,
+          "author": "jdfrens",
+          "path": "apps/core/lib/core/application.ex",
+          "line": 23,
+          "created_at": "2026-05-13T16:19:57Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/662#discussion_r3631617839",
+          "repo": "user_management_service",
+          "pr_number": 662,
+          "author": "jdfrens",
+          "path": "apps/core/lib/core/gateways/never_bounce.ex",
+          "line": 83,
+          "created_at": "2026-07-22T15:38:49Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/669#discussion_r3623120710",
+          "repo": "user_management_service",
+          "pr_number": 669,
+          "author": "jdfrens",
+          "path": "apps/core/priv/repo/migrations/20260717235817_add_canonical_email_to_credential_sets.exs",
+          "line": 11,
+          "created_at": "2026-07-21T14:44:33Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/device_payment_service/pull/80#discussion_r1836939743",
+          "repo": "device_payment_service",
+          "pr_number": 80,
+          "author": "jdfrens",
+          "path": "apps/core/lib/core/behaviour/vendor.ex",
+          "line": 70,
+          "created_at": "2024-11-11T16:38:31Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/cb_auth/pull/16#discussion_r2515286955",
+          "repo": "cb_auth",
+          "pr_number": 16,
+          "author": "jdfrens",
+          "path": "lib/cb_auth.ex",
+          "line": 340,
+          "created_at": "2025-11-11T18:44:24Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/cb_pos_bridge/pull/114#discussion_r3319918721",
+          "repo": "cb_pos_bridge",
+          "pr_number": 114,
+          "author": "jdfrens",
+          "path": "lib/cb_pos_bridge/device/printer.ex",
+          "line": 112,
+          "created_at": "2026-05-28T18:32:41Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/device_payment_service/pull/176#discussion_r3461350438",
+          "repo": "device_payment_service",
+          "pr_number": 176,
+          "author": "jdfrens",
+          "path": "apps/core/lib/core/device_payment.ex",
+          "line": 182,
+          "created_at": "2026-06-23T16:34:15Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/device_payment_service/pull/194#discussion_r3753395635",
+          "repo": "device_payment_service",
+          "pr_number": 194,
+          "author": "davidtimmons",
+          "path": "apps/core/lib/core/device_payment_api.ex",
+          "line": 520,
+          "created_at": "2026-08-10T21:08:51Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/device_payment_service/pull/194#discussion_r3760982386",
+          "repo": "device_payment_service",
+          "pr_number": 194,
+          "author": "davidtimmons",
+          "path": "apps/core/lib/core/vendor/datacap/response_helper.ex",
+          "line": 496,
+          "created_at": "2026-08-11T19:15:49Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/invoice_service/pull/368#discussion_r1538224753",
+          "repo": "invoice_service",
+          "pr_number": 368,
+          "author": "jdfrens",
+          "path": "apps/web/lib/web/schemas/invoice_action_url.ex",
+          "line": 11,
+          "created_at": "2024-03-25T20:52:50Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/569#discussion_r1718961269",
+          "repo": "user_management_service",
+          "pr_number": 569,
+          "author": "jdfrens",
+          "path": "apps/web/lib/web/open_api/contact.ex",
+          "line": 15,
+          "created_at": "2024-08-15T20:35:07Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/payment_api/pull/1193#discussion_r2500808513",
+          "repo": "payment_api",
+          "pr_number": 1193,
+          "author": "jdfrens",
+          "path": "apps/web/lib/web/auth.ex",
+          "line": 131,
+          "created_at": "2025-11-06T20:46:09Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/cb_relay/pull/80#discussion_r2834208198",
+          "repo": "cb_relay",
+          "pr_number": 80,
+          "author": "jdfrens",
+          "path": "guides/development/copy_json_file.md",
+          "line": 27,
+          "created_at": "2026-02-20T17:06:39Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/imp_backend/pull/1969#discussion_r3095578871",
+          "repo": "imp_backend",
+          "pr_number": 1969,
+          "author": "jdfrens",
+          "path": "config/test.exs",
+          "line": 99,
+          "created_at": "2026-04-16T18:44:19Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/file_lookup_service/pull/515#discussion_r3221968218",
+          "repo": "file_lookup_service",
+          "pr_number": 515,
+          "author": "jdfrens",
+          "path": "apps/core/test/core/austin_tx/emergency_medical_services/obligation_test.exs",
+          "line": 3,
+          "created_at": "2026-05-11T20:33:46Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/630#discussion_r3235756661",
+          "repo": "user_management_service",
+          "pr_number": 630,
+          "author": "jdfrens",
+          "path": "apps/core/lib/core/api/okta.ex",
+          "line": 421,
+          "created_at": "2026-05-13T16:09:45Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/630#discussion_r3235805018",
+          "repo": "user_management_service",
+          "pr_number": 630,
+          "author": "jdfrens",
+          "path": "apps/core/lib/core/cache/user_groups.ex",
+          "line": 35,
+          "created_at": "2026-05-13T16:16:22Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/630#discussion_r3235812532",
+          "repo": "user_management_service",
+          "pr_number": 630,
+          "author": "jdfrens",
+          "path": "apps/core/lib/core/cache/user_groups.ex",
+          "line": 52,
+          "created_at": "2026-05-13T16:17:28Z"
+        }
+      ]
+    },
+    {
+      "name": "Leaving TODO Comments",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/invoice_service/pull/368#discussion_r1539914258",
+          "repo": "invoice_service",
+          "pr_number": 368,
+          "author": "jdfrens",
+          "path": "apps/web/lib/web/controllers/invoice_controller.ex",
+          "line": 23,
+          "created_at": "2024-03-26T18:47:43Z"
+        }
+      ]
+    },
+    {
+      "name": "Committed Dead Code",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/cb_pos_bridge/pull/114#discussion_r3269451569",
+          "repo": "cb_pos_bridge",
+          "pr_number": 114,
+          "author": "jdfrens",
+          "path": "script/podman_buildx/dev",
+          "line": 32,
+          "created_at": "2026-05-19T20:34:41Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/payment_api/pull/1193#discussion_r2500801434",
+          "repo": "payment_api",
+          "pr_number": 1193,
+          "author": "jdfrens",
+          "path": "apps/web/lib/web/auth.ex",
+          "line": 124,
+          "created_at": "2025-11-06T20:44:22Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/schedule_service/pull/397#discussion_r2543776471",
+          "repo": "schedule_service",
+          "pr_number": 397,
+          "author": "jdfrens",
+          "path": "apps/web/lib/web/auth.ex",
+          "line": 64,
+          "created_at": "2025-11-19T22:34:32Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/588#discussion_r2182965311",
+          "repo": "user_management_service",
+          "pr_number": 588,
+          "author": "jdfrens",
+          "path": "apps/core/lib/core/api/profile_authentication.ex",
+          "line": 143,
+          "created_at": "2025-07-03T14:38:56Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/630#discussion_r3174876205",
+          "repo": "user_management_service",
+          "pr_number": 630,
+          "author": "wumbabum",
+          "path": "apps/core/lib/core/cache/user_groups.ex",
+          "line": 98,
+          "created_at": "2026-05-01T19:43:59Z"
+        }
+      ]
+    },
+    {
+      "name": "Committed Generated Artifacts",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/invoice_service/pull/361#discussion_r1522022157",
+          "repo": "invoice_service",
+          "pr_number": 361,
+          "author": "jdfrens",
+          "path": "openapi.json",
+          "line": 1,
+          "created_at": "2024-03-12T19:37:45Z"
+        }
+      ]
+    },
+    {
+      "name": "Duplicating Values With Homes",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/gql_interface/pull/483#discussion_r3399398892",
+          "repo": "gql_interface",
+          "pr_number": 483,
+          "author": "davidtimmons",
+          "path": "lib/gql_interface/autonomous_payment.ex",
+          "line": 230,
+          "created_at": "2026-06-11T21:51:36Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/557#discussion_r1619263143",
+          "repo": "user_management_service",
+          "pr_number": 557,
+          "author": "jdfrens",
+          "path": "apps/web/lib/web/controllers/address_controller.ex",
+          "line": 13,
+          "created_at": "2024-05-29T17:43:19Z"
+        }
+      ]
+    },
+    {
+      "name": "Over Engineering And Abstraction",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/graphql_service/pull/533#discussion_r1785239972",
+          "repo": "graphql_service",
+          "pr_number": 533,
+          "author": "jdfrens",
+          "path": "lib/api/resolvers/contact_resolver.ex",
+          "line": 73,
+          "created_at": "2024-10-02T20:55:02Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/630#discussion_r3235823827",
+          "repo": "user_management_service",
+          "pr_number": 630,
+          "author": "jdfrens",
+          "path": "apps/core/lib/core/cache/user_groups.ex",
+          "line": 79,
+          "created_at": "2026-05-13T16:19:14Z"
+        }
+      ]
+    },
+    {
+      "name": "Feature Envy Across Structs",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/device_payment_service/pull/93#discussion_r1869808581",
+          "repo": "device_payment_service",
+          "pr_number": 93,
+          "author": "jdfrens",
+          "path": "apps/core/lib/core/ghenghis_api/response_helper.ex",
+          "line": 1,
+          "created_at": "2024-12-04T15:38:01Z"
+        }
+      ]
+    },
+    {
+      "name": "Matching On Keyword Lists",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/cb_relay/pull/14#discussion_r1526556245",
+          "repo": "cb_relay",
+          "pr_number": 14,
+          "author": "jdfrens",
+          "path": "lib/cb_relay/airbrake_report.ex",
+          "line": 39,
+          "created_at": "2024-03-15T16:41:06Z"
+        }
+      ]
+    },
+    {
+      "name": "Depending On Map Ordering",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/schedule_service/pull/378#discussion_r2025575262",
+          "repo": "schedule_service",
+          "pr_number": 378,
+          "author": "jdfrens",
+          "path": "apps/dispatcher/test/dispatcher/orchestrator_spawner_test.exs",
+          "line": 62,
+          "created_at": "2025-04-02T20:49:05Z"
+        }
+      ]
+    },
+    {
+      "name": "Matching Changeset Internal Values",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/client_management_dashboard/pull/180#discussion_r3103152764",
+          "repo": "client_management_dashboard",
+          "pr_number": 180,
+          "author": "wumbabum",
+          "path": "apps/web/lib/web/live/pin_pad_live.ex",
+          "line": 420,
+          "created_at": "2026-04-17T20:44:50Z"
+        }
+      ]
+    },
+    {
+      "name": "Unpopulated Virtual Fields",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/bank_account_service/pull/258#discussion_r1601976587",
+          "repo": "bank_account_service",
+          "pr_number": 258,
+          "author": "jdfrens",
+          "path": "apps/web/lib/web/views/bank_account_view.ex",
+          "line": 8,
+          "created_at": "2024-05-15T16:59:17Z"
+        }
+      ]
+    },
+    {
+      "name": "N Plus One Queries",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/client_management_dashboard/pull/169#discussion_r2695275956",
+          "repo": "client_management_dashboard",
+          "pr_number": 169,
+          "author": "wumbabum",
+          "path": "apps/web/lib/web/live/pin_pads_index_live.ex",
+          "line": 490,
+          "created_at": "2026-01-15T17:18:28Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/file_lookup_service/pull/471#discussion_r2243486135",
+          "repo": "file_lookup_service",
+          "pr_number": 471,
+          "author": "jdfrens",
+          "path": "apps/web/test/web/controllers/obligation_association_controller_test.exs",
+          "line": 398,
+          "created_at": "2025-07-30T18:02:41Z"
+        }
+      ]
+    },
+    {
+      "name": "Dispatching On Later Arguments",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/payment_api/pull/1155#discussion_r2150849146",
+          "repo": "payment_api",
+          "pr_number": 1155,
+          "author": "jdfrens",
+          "path": "apps/payment/lib/payment.ex",
+          "line": 702,
+          "created_at": "2025-06-16T20:45:51Z"
+        }
+      ]
+    },
+    {
+      "name": "Modules Importing Each Other",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/device_payment_service/pull/39#discussion_r1729198578",
+          "repo": "device_payment_service",
+          "pr_number": 39,
+          "author": "wumbabum",
+          "path": "apps/core/test/support/generators/device_payment_generator.ex",
+          "line": 69,
+          "created_at": "2024-08-23T16:02:09Z"
+        }
+      ]
+    },
+    {
+      "name": "Regex For Nested Grammars",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/gql_interface/pull/481#discussion_r3157543254",
+          "repo": "gql_interface",
+          "pr_number": 481,
+          "author": "jdfrens",
+          "path": "docs/adr/2026-04-17-PUL-22-graphql-query-sanitizer.md",
+          "line": 208,
+          "created_at": "2026-04-28T22:15:49Z"
+        }
+      ]
+    },
+    {
+      "name": "Test Only Modules In Production",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/file_lookup_service/pull/469#discussion_r2208455477",
+          "repo": "file_lookup_service",
+          "pr_number": 469,
+          "author": "jdfrens",
+          "path": "apps/web/lib/web/controllers/obligation_association_controller.ex",
+          "line": 8,
+          "created_at": "2025-07-15T19:18:09Z"
+        }
+      ]
+    },
+    {
+      "name": "Logic In Mix Tasks",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/cb_relay/pull/75#discussion_r2800527777",
+          "repo": "cb_relay",
+          "pr_number": 75,
+          "author": "jdfrens",
+          "path": "lib/mix/tasks/generate_function_spec.ex",
+          "line": 1,
+          "created_at": "2026-02-12T18:49:53Z"
+        }
+      ]
+    },
+    {
+      "name": "OpenAPI Header Parameters",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/615#discussion_r2515682592",
+          "repo": "user_management_service",
+          "pr_number": 615,
+          "author": "wumbabum",
+          "path": "apps/web/lib/web/controllers/contact_controller.ex",
+          "line": 26,
+          "created_at": "2025-11-11T20:29:20Z"
+        }
+      ]
+    },
+    {
+      "name": "Overusing Mox Stub",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/615#discussion_r2515021092",
+          "repo": "user_management_service",
+          "pr_number": 615,
+          "author": "jdfrens",
+          "path": "apps/web/test/support/authentication_helpers.ex",
+          "line": 33,
+          "created_at": "2025-11-11T17:13:42Z"
+        }
+      ]
+    },
+    {
+      "name": "Synchronous Test Designs",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/664#discussion_r3631821186",
+          "repo": "user_management_service",
+          "pr_number": 664,
+          "author": "jdfrens",
+          "path": "apps/event_bus/test/event_bus/subscribers/create_authentication_test.exs",
+          "line": 388,
+          "created_at": "2026-07-22T16:05:28Z"
+        }
+      ]
+    },
+    {
+      "name": "Application Env In Tests",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/payment_api/pull/1155#discussion_r2157375323",
+          "repo": "payment_api",
+          "pr_number": 1155,
+          "author": "jdfrens",
+          "path": "apps/payment/test/gateways/captcha_test.exs",
+          "line": 71,
+          "created_at": "2025-06-19T16:33:22Z"
+        }
+      ]
+    },
+    {
+      "name": "Do Not Log Expected Outcomes At Warning Or Error",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/bank_account_service/pull/266#discussion_r1666906276",
+          "repo": "bank_account_service",
+          "pr_number": 266,
+          "author": "jdfrens",
+          "path": "apps/web/lib/web/controllers/bank_account_controller.ex",
+          "line": 91,
+          "created_at": "2024-07-05T14:58:35Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/518#discussion_r1297360553",
+          "repo": "user_management_service",
+          "pr_number": 518,
+          "author": "jdfrens",
+          "path": "apps/service_tasks/lib/service_tasks/okta.ex",
+          "line": 156,
+          "created_at": "2023-08-17T15:05:30Z"
+        }
+      ]
+    },
+    {
+      "name": "Give Error And Airbrake Notices Actionable Context",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/device_payment_service/pull/159#discussion_r2861290559",
+          "repo": "device_payment_service",
+          "pr_number": 159,
+          "author": "davidtimmons",
+          "path": "apps/core/lib/core/work/report_payment_cashiering_worker.ex",
+          "line": 69,
+          "created_at": "2026-02-26T21:05:57Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/file_lookup_service/pull/469#discussion_r2208489386",
+          "repo": "file_lookup_service",
+          "pr_number": 469,
+          "author": "jdfrens",
+          "path": "apps/web/lib/web/controllers/obligation_association_controller.ex",
+          "line": 249,
+          "created_at": "2025-07-15T19:34:49Z"
+        }
+      ]
+    },
+    {
+      "name": "Avoid Time-Relative Words In Comments",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/gql_interface/pull/481#discussion_r3101916897",
+          "repo": "gql_interface",
+          "pr_number": 481,
+          "author": "jdfrens",
+          "path": "lib/gql_interface/graphql_query_sanitizer.ex",
+          "line": 102,
+          "created_at": "2026-04-17T16:54:30Z"
+        }
+      ]
+    }
+  ]
+}
