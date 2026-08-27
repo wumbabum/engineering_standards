@@ -1,0 +1,614 @@
+{
+  "schema_version": 3,
+  "doc": "standards/elixir/tooling.md",
+  "rules": [
+    {
+      "name": "Pin Dependencies At Minor Level",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/payment_api/pull/1065#discussion_r1534133869",
+          "repo": "payment_api",
+          "pr_number": 1065,
+          "author": "jdfrens",
+          "path": "apps/web/mix.exs",
+          "line": 62,
+          "created_at": "2024-03-21T15:22:55Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/bank_account_service/pull/260#discussion_r1619112591",
+          "repo": "bank_account_service",
+          "pr_number": 260,
+          "author": "jdfrens",
+          "path": "apps/web/mix.exs",
+          "line": 52,
+          "created_at": "2024-05-29T15:42:28Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/token/pull/36#discussion_r1670965372",
+          "repo": "token",
+          "pr_number": 36,
+          "author": "jdfrens",
+          "path": "mix.exs",
+          "line": 57,
+          "created_at": "2024-07-09T18:10:57Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/payment_api/pull/1093#discussion_r1733431881",
+          "repo": "payment_api",
+          "pr_number": 1093,
+          "author": "jdfrens",
+          "path": "apps/authentication/mix.exs",
+          "line": 49,
+          "created_at": "2024-08-27T19:47:40Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/schedule_service/pull/397#discussion_r2582113103",
+          "repo": "schedule_service",
+          "pr_number": 397,
+          "author": "jdfrens",
+          "path": "apps/web/mix.exs",
+          "line": 53,
+          "created_at": "2025-12-02T17:08:19Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/file_lookup_service/pull/498#discussion_r2582173377",
+          "repo": "file_lookup_service",
+          "pr_number": 498,
+          "author": "jdfrens",
+          "path": "apps/web/mix.exs",
+          "line": 45,
+          "created_at": "2025-12-02T17:27:01Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/gql_interface/pull/476#discussion_r2853891306",
+          "repo": "gql_interface",
+          "pr_number": 476,
+          "author": "jdfrens",
+          "path": "mix.exs",
+          "line": 48,
+          "created_at": "2026-02-25T15:56:14Z"
+        }
+      ]
+    },
+    {
+      "name": "Alphabetize The Dependency List",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/schedule_service/pull/329#discussion_r1503146601",
+          "repo": "schedule_service",
+          "pr_number": 329,
+          "author": "jdfrens",
+          "path": "apps/core/mix.exs",
+          "line": 58,
+          "created_at": "2024-02-26T18:58:04Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/cb_auth/pull/16#discussion_r2543744329",
+          "repo": "cb_auth",
+          "pr_number": 16,
+          "author": "jdfrens",
+          "path": "mix.exs",
+          "line": 57,
+          "created_at": "2025-11-19T22:20:02Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/644#discussion_r3375749985",
+          "repo": "user_management_service",
+          "pr_number": 644,
+          "author": "wumbabum",
+          "path": "apps/event_bus/mix.exs",
+          "line": 40,
+          "created_at": "2026-06-08T19:15:58Z"
+        }
+      ]
+    },
+    {
+      "name": "Keep Deps In One Function",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/audit_service/pull/11#discussion_r2089325748",
+          "repo": "audit_service",
+          "pr_number": 11,
+          "author": "jdfrens",
+          "path": "apps/api/mix.exs",
+          "line": 33,
+          "created_at": "2025-05-14T16:30:16Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/device_payment_service/pull/1#discussion_r1565989719",
+          "repo": "device_payment_service",
+          "pr_number": 1,
+          "author": "jdfrens",
+          "path": "apps/core/mix.exs",
+          "line": 16,
+          "created_at": "2024-04-15T15:32:46Z"
+        }
+      ]
+    },
+    {
+      "name": "Justify Dependency Version Overrides",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/618#discussion_r2709239617",
+          "repo": "user_management_service",
+          "pr_number": 618,
+          "author": "jdfrens",
+          "path": "mix.exs",
+          "line": 47,
+          "created_at": "2026-01-20T16:56:31Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/618#discussion_r2733903048",
+          "repo": "user_management_service",
+          "pr_number": 618,
+          "author": "jdfrens",
+          "path": "mix.exs",
+          "line": 49,
+          "created_at": "2026-01-27T21:29:36Z"
+        }
+      ]
+    },
+    {
+      "name": "Preserve Load Order Dependencies",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/bank_account_service/pull/297#discussion_r3776705044",
+          "repo": "bank_account_service",
+          "pr_number": 297,
+          "author": "jdfrens",
+          "path": "apps/web/mix.exs",
+          "line": 57,
+          "created_at": "2026-08-13T15:28:58Z"
+        }
+      ]
+    },
+    {
+      "name": "Prune Unused Dependencies",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/cb_pos_bridge/pull/81#discussion_r1483577382",
+          "repo": "cb_pos_bridge",
+          "pr_number": 81,
+          "author": "jdfrens",
+          "path": "config/config.exs",
+          "line": 33,
+          "created_at": "2024-02-08T20:52:46Z"
+        }
+      ]
+    },
+    {
+      "name": "Include Test Support In Paths",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/audit_service/pull/11#discussion_r2089583721",
+          "repo": "audit_service",
+          "pr_number": 11,
+          "author": "jdfrens",
+          "path": "apps/core/mix.exs",
+          "line": 51,
+          "created_at": "2025-05-14T19:19:22Z"
+        }
+      ]
+    },
+    {
+      "name": "Use Cli Function For Preferences",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/graphql_service/pull/616#discussion_r3149041678",
+          "repo": "graphql_service",
+          "pr_number": 616,
+          "author": "jdfrens",
+          "path": "mix.exs",
+          "line": 129,
+          "created_at": "2026-04-27T17:19:33Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/cb_relay/pull/83#discussion_r3133484526",
+          "repo": "cb_relay",
+          "pr_number": 83,
+          "author": "jdfrens",
+          "path": "mix.exs",
+          "line": 46,
+          "created_at": "2026-04-23T20:03:54Z"
+        }
+      ]
+    },
+    {
+      "name": "Prefer Standard Library Over Dependencies",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/payment_api/pull/1260#discussion_r3508162686",
+          "repo": "payment_api",
+          "pr_number": 1260,
+          "author": "jdfrens",
+          "path": "apps/payment/lib/payment/gateways/ghenghis/requests/search_transactions.ex",
+          "line": 186,
+          "created_at": "2026-07-01T18:14:14Z"
+        }
+      ]
+    },
+    {
+      "name": "Use Jason As JSON Encoder",
+      "tags": [
+        "jason"
+      ],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/bank_account_service/pull/258#discussion_r1600510352",
+          "repo": "bank_account_service",
+          "pr_number": 258,
+          "author": "jdfrens",
+          "path": "apps/core/mix.exs",
+          "line": 58,
+          "created_at": "2024-05-14T18:56:49Z"
+        }
+      ]
+    },
+    {
+      "name": "Set Consistent Line Length",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/file_lookup_service/pull/422#discussion_r1598684801",
+          "repo": "file_lookup_service",
+          "pr_number": 422,
+          "author": "jdfrens",
+          "path": "apps/dispatch/lib/workers/account_bill_s3_upload_worker.ex",
+          "line": 47,
+          "created_at": "2024-05-13T15:40:32Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/file_lookup_service/pull/422#discussion_r1598688554",
+          "repo": "file_lookup_service",
+          "pr_number": 422,
+          "author": "jdfrens",
+          "path": "apps/ingest/.formatter.exs",
+          "line": 2,
+          "created_at": "2024-05-13T15:43:21Z"
+        }
+      ]
+    },
+    {
+      "name": "Import DSL Libraries In Formatter",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/file_lookup_service/pull/422#discussion_r1598682993",
+          "repo": "file_lookup_service",
+          "pr_number": 422,
+          "author": "jdfrens",
+          "path": "apps/dispatch/lib/workers/account_bill_s3_upload_worker.ex",
+          "line": 15,
+          "created_at": "2024-05-13T15:39:14Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/invoice_service/pull/368#discussion_r1539909496",
+          "repo": "invoice_service",
+          "pr_number": 368,
+          "author": "jdfrens",
+          "path": "apps/core/priv/repo/migrations/20240311161918_add_paid_at_to_invoices.exs",
+          "line": 6,
+          "created_at": "2024-03-26T18:45:08Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/bank_account_service/pull/255#discussion_r1543453902",
+          "repo": "bank_account_service",
+          "pr_number": 255,
+          "author": "jdfrens",
+          "path": "apps/web/lib/web/controllers/bank_account_controller.ex",
+          "line": 11,
+          "created_at": "2024-03-28T18:35:51Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/bank_account_service/pull/258#discussion_r1603634449",
+          "repo": "bank_account_service",
+          "pr_number": 258,
+          "author": "jdfrens",
+          "path": "apps/core/lib/core/queries/bank_account_query.ex",
+          "line": 33,
+          "created_at": "2024-05-16T15:49:22Z"
+        }
+      ]
+    },
+    {
+      "name": "Format Non Elixir Languages",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/575#discussion_r1795709401",
+          "repo": "user_management_service",
+          "pr_number": 575,
+          "author": "samgranieri",
+          "path": "open_policy_agent/lib/user_management/users/create_reset_password_key.rego",
+          "line": 16,
+          "created_at": "2024-10-10T15:48:14Z"
+        }
+      ]
+    },
+    {
+      "name": "Run Credo In Strict Mode",
+      "tags": [
+        "credo"
+      ],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/cb_audit/pull/1#discussion_r2077923540",
+          "repo": "cb_audit",
+          "pr_number": 1,
+          "author": "jdfrens",
+          "path": ".credo.exs",
+          "line": 49,
+          "created_at": "2025-05-07T15:28:46Z"
+        }
+      ]
+    },
+    {
+      "name": "Enable Dbg Warning Check",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/cb_pos_bridge/pull/84#discussion_r1633454237",
+          "repo": "cb_pos_bridge",
+          "pr_number": 84,
+          "author": "jdfrens",
+          "path": ".credo.exs",
+          "line": 144,
+          "created_at": "2024-06-10T15:33:23Z"
+        }
+      ]
+    },
+    {
+      "name": "Enable Spec Typespec Check",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/cb_audit/pull/1#discussion_r2077934297",
+          "repo": "cb_audit",
+          "pr_number": 1,
+          "author": "jdfrens",
+          "path": ".credo.exs",
+          "line": 187,
+          "created_at": "2025-05-07T15:34:45Z"
+        }
+      ]
+    },
+    {
+      "name": "Configure Credo To Team Style",
+      "tags": [
+        "credo"
+      ],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/662#discussion_r3631662348",
+          "repo": "user_management_service",
+          "pr_number": 662,
+          "author": "jdfrens",
+          "path": ".credo.exs",
+          "line": 177,
+          "created_at": "2026-07-22T15:44:05Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/audit_service/pull/54#discussion_r2611709889",
+          "repo": "audit_service",
+          "pr_number": 54,
+          "author": "jdfrens",
+          "path": "apps/api/lib/api.ex",
+          "line": 10,
+          "created_at": "2025-12-11T18:52:23Z"
+        }
+      ]
+    },
+    {
+      "name": "Configure Dialyzer PLT Caching",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/cb_audit/pull/1#discussion_r2077988051",
+          "repo": "cb_audit",
+          "pr_number": 1,
+          "author": "jdfrens",
+          "path": "mix.exs",
+          "line": 32,
+          "created_at": "2025-05-07T16:00:23Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/cb_audit/pull/1#discussion_r2077975238",
+          "repo": "cb_audit",
+          "pr_number": 1,
+          "author": "jdfrens",
+          "path": ".gitignore",
+          "line": 9,
+          "created_at": "2025-05-07T15:53:29Z"
+        }
+      ]
+    },
+    {
+      "name": "Fix Dialyzer Discrepancies",
+      "tags": [
+        "dialyxir"
+      ],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/gql_interface/pull/440#discussion_r1592551420",
+          "repo": "gql_interface",
+          "pr_number": 440,
+          "author": "samgranieri",
+          "path": "lib/gateway/lookup/normalizer/apc.ex",
+          "line": 77,
+          "created_at": "2024-05-07T14:09:08Z"
+        }
+      ]
+    },
+    {
+      "name": "Fail Build On Warnings",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/gql_interface/pull/415#discussion_r1376308026",
+          "repo": "gql_interface",
+          "pr_number": 415,
+          "author": "samgranieri",
+          "path": ".github/workflows/test.yml",
+          "line": 154,
+          "created_at": "2023-10-30T14:25:13Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/audit_service/pull/1#discussion_r2042883478",
+          "repo": "audit_service",
+          "pr_number": 1,
+          "author": "jdfrens",
+          "path": ".github/workflows/test.yml",
+          "line": 71,
+          "created_at": "2025-04-14T20:29:33Z"
+        }
+      ]
+    },
+    {
+      "name": "Pin Toolchain Patch Versions",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/token/pull/36#discussion_r1670960470",
+          "repo": "token",
+          "pr_number": 36,
+          "author": "jdfrens",
+          "path": ".github/workflows/test.yml",
+          "line": 47,
+          "created_at": "2024-07-09T18:07:22Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/tax_calculator/pull/231#discussion_r3024478678",
+          "repo": "tax_calculator",
+          "pr_number": 231,
+          "author": "wumbabum",
+          "path": ".github/workflows/test.yml",
+          "line": 25,
+          "created_at": "2026-04-01T20:28:48Z"
+        }
+      ]
+    },
+    {
+      "name": "Sync Elixir Version Constraint",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/cb_relay/pull/79#discussion_r2843056039",
+          "repo": "cb_relay",
+          "pr_number": 79,
+          "author": "davidtimmons",
+          "path": "mix.exs",
+          "line": 1,
+          "created_at": "2026-02-23T20:56:51Z"
+        }
+      ]
+    },
+    {
+      "name": "Cache Build Artifacts Cautiously",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/cb_pos_bridge/pull/79#discussion_r1465453542",
+          "repo": "cb_pos_bridge",
+          "pr_number": 79,
+          "author": "jdfrens",
+          "path": ".github/workflows/build.yml",
+          "line": 14,
+          "created_at": "2024-01-24T19:41:48Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/invoice_service/pull/368#discussion_r1541264194",
+          "repo": "invoice_service",
+          "pr_number": 368,
+          "author": "jdfrens",
+          "path": ".github/workflows/test.yml",
+          "line": 63,
+          "created_at": "2024-03-27T14:44:53Z"
+        }
+      ]
+    },
+    {
+      "name": "Avoid Unnecessary CI Matrix",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/515#discussion_r1286194360",
+          "repo": "user_management_service",
+          "pr_number": 515,
+          "author": "jdfrens",
+          "path": ".github/workflows/test.yml",
+          "line": 8,
+          "created_at": "2023-08-07T17:32:44Z"
+        }
+      ]
+    },
+    {
+      "name": "Keep Mix Test Default",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/payment_api/pull/1093#discussion_r1733456385",
+          "repo": "payment_api",
+          "pr_number": 1093,
+          "author": "jdfrens",
+          "path": "mix.exs",
+          "line": 22,
+          "created_at": "2024-08-27T20:11:52Z"
+        }
+      ]
+    },
+    {
+      "name": "Make Setup Tasks Reliable",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/device_payment_service/pull/1#discussion_r1562522556",
+          "repo": "device_payment_service",
+          "pr_number": 1,
+          "author": "samgranieri",
+          "path": "mix.exs",
+          "line": 21,
+          "created_at": "2024-04-12T13:03:54Z"
+        }
+      ]
+    },
+    {
+      "name": "Use Release Tasks For Production",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/payment_api/pull/1021#discussion_r1285880099",
+          "repo": "payment_api",
+          "pr_number": 1021,
+          "author": "spearce-citybase",
+          "path": "apps/service_tasks/README.md",
+          "line": 1,
+          "created_at": "2023-08-07T13:37:26Z"
+        }
+      ]
+    },
+    {
+      "name": "End Files With Newline",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/cb_audit/pull/1#discussion_r2077973448",
+          "repo": "cb_audit",
+          "pr_number": 1,
+          "author": "jdfrens",
+          "path": ".tool-versions",
+          "line": 1,
+          "created_at": "2025-05-07T15:52:32Z"
+        }
+      ]
+    }
+  ]
+}
