@@ -1,0 +1,286 @@
+{
+  "schema_version": 3,
+  "doc": "standards/elixir/open-api-specs.md",
+  "rules": [
+    {
+      "name": "Nullable Non-Required Fields",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/audit_service/pull/11#discussion_r2089348761",
+          "repo": "audit_service",
+          "pr_number": 11,
+          "author": "jdfrens",
+          "path": "apps/web/lib/web/open_api/change.ex",
+          "line": 13,
+          "created_at": "2025-05-14T16:45:01Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/audit_service/pull/11#discussion_r2089349431",
+          "repo": "audit_service",
+          "pr_number": 11,
+          "author": "jdfrens",
+          "path": "apps/web/lib/web/open_api/change.ex",
+          "line": 14,
+          "created_at": "2025-05-14T16:45:29Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/device_payment_service/pull/109#discussion_r1901964370",
+          "repo": "device_payment_service",
+          "pr_number": 109,
+          "author": "jdfrens",
+          "path": "apps/web/lib/web/open_api/device.ex",
+          "line": 17,
+          "created_at": "2025-01-03T16:36:53Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/569#discussion_r1718937574",
+          "repo": "user_management_service",
+          "pr_number": 569,
+          "author": "jdfrens",
+          "path": "apps/web/lib/web/open_api/contact.ex",
+          "line": 19,
+          "created_at": "2024-08-15T20:12:27Z"
+        }
+      ]
+    },
+    {
+      "name": "Reference Schemas For Refs",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/569#discussion_r1718965191",
+          "repo": "user_management_service",
+          "pr_number": 569,
+          "author": "jdfrens",
+          "path": "apps/web/lib/web/open_api/contacts_response.ex",
+          "line": 15,
+          "created_at": "2024-08-15T20:39:25Z"
+        }
+      ]
+    },
+    {
+      "name": "Record Type Property First",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/569#discussion_r1725377280",
+          "repo": "user_management_service",
+          "pr_number": 569,
+          "author": "jdfrens",
+          "path": "apps/web/lib/web/open_api/contact.ex",
+          "line": 12,
+          "created_at": "2024-08-21T16:21:24Z"
+        }
+      ]
+    },
+    {
+      "name": "Email Format On Strings",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/574#discussion_r1787840422",
+          "repo": "user_management_service",
+          "pr_number": 574,
+          "author": "jdfrens",
+          "path": "apps/web/lib/web/open_api/create_password_reset_key_request.ex",
+          "line": 13,
+          "created_at": "2024-10-04T14:51:39Z"
+        }
+      ]
+    },
+    {
+      "name": "Literal Data For Examples",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/574#discussion_r1790430460",
+          "repo": "user_management_service",
+          "pr_number": 574,
+          "author": "jdfrens",
+          "path": "apps/web/lib/web/open_api/password_reset_key_response.ex",
+          "line": 16,
+          "created_at": "2024-10-07T15:19:15Z"
+        }
+      ]
+    },
+    {
+      "name": "List Only Unreferenced Schemas",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/574#discussion_r1790432101",
+          "repo": "user_management_service",
+          "pr_number": 574,
+          "author": "jdfrens",
+          "path": "apps/web/lib/web/open_api.ex",
+          "line": 37,
+          "created_at": "2024-10-07T15:20:14Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/652#discussion_r3455095611",
+          "repo": "user_management_service",
+          "pr_number": 652,
+          "author": "jdfrens",
+          "path": "apps/web/lib/web/open_api.ex",
+          "line": 34,
+          "created_at": "2026-06-22T20:02:53Z"
+        }
+      ]
+    },
+    {
+      "name": "Empty Response Body Description",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/device_payment_service/pull/109#discussion_r1901957705",
+          "repo": "device_payment_service",
+          "pr_number": 109,
+          "author": "jdfrens",
+          "path": "apps/web/lib/web/controllers/devices_controller.ex",
+          "line": 46,
+          "created_at": "2025-01-03T16:29:04Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/device_payment_service/pull/109#discussion_r1901959871",
+          "repo": "device_payment_service",
+          "pr_number": 109,
+          "author": "jdfrens",
+          "path": "apps/web/lib/web/controllers/devices_controller.ex",
+          "line": 47,
+          "created_at": "2025-01-03T16:31:30Z"
+        }
+      ]
+    },
+    {
+      "name": "Specify Every Action Operation",
+      "tags": [
+        "open_api_spex"
+      ],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/device_payment_service/pull/109#discussion_r1901936152",
+          "repo": "device_payment_service",
+          "pr_number": 109,
+          "author": "samgranieri",
+          "path": "apps/web/lib/web/controllers/devices_controller.ex",
+          "line": 23,
+          "created_at": "2025-01-03T16:05:38Z"
+        }
+      ]
+    },
+    {
+      "name": "Omit Redundant Action Doc",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/bank_account_service/pull/260#discussion_r1619108094",
+          "repo": "bank_account_service",
+          "pr_number": 260,
+          "author": "jdfrens",
+          "path": "apps/web/lib/web/controllers/bank_account_controller.ex",
+          "line": 50,
+          "created_at": "2024-05-29T15:39:27Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/payment_api/pull/1110#discussion_r1813073034",
+          "repo": "payment_api",
+          "pr_number": 1110,
+          "author": "jdfrens",
+          "path": "apps/web/lib/web/controllers/v1/payment_instrument_controller.ex",
+          "line": 53,
+          "created_at": "2024-10-23T15:45:26Z"
+        }
+      ]
+    },
+    {
+      "name": "CastAndValidate For Validation Errors",
+      "tags": [
+        "open_api_spex"
+      ],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/557#discussion_r1617894002",
+          "repo": "user_management_service",
+          "pr_number": 557,
+          "author": "jdfrens",
+          "path": "apps/web/lib/web/controllers/address_controller.ex",
+          "line": 41,
+          "created_at": "2024-05-28T21:08:46Z"
+        }
+      ]
+    },
+    {
+      "name": "View Matches Schema Fields",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/603#discussion_r2380110070",
+          "repo": "user_management_service",
+          "pr_number": 603,
+          "author": "jdfrens",
+          "path": "apps/web/lib/web/views/sso/person_view.ex",
+          "line": 31,
+          "created_at": "2025-09-25T19:22:39Z"
+        }
+      ]
+    },
+    {
+      "name": "OpenAPI Header Parameters",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/615#discussion_r2515682592",
+          "repo": "user_management_service",
+          "pr_number": 615,
+          "author": "wumbabum",
+          "path": "apps/web/lib/web/controllers/contact_controller.ex",
+          "line": 26,
+          "created_at": "2025-11-11T20:29:20Z"
+        }
+      ]
+    },
+    {
+      "name": "Assert OpenAPI Schema Conformance",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/audit_service/pull/30#discussion_r2302046637",
+          "repo": "audit_service",
+          "pr_number": 30,
+          "author": "jdfrens",
+          "path": "apps/web/lib/web/open_api/entry.ex",
+          "line": 30,
+          "created_at": "2025-08-26T20:17:07Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/bank_account_service/pull/258#discussion_r1600535941",
+          "repo": "bank_account_service",
+          "pr_number": 258,
+          "author": "jdfrens",
+          "path": "apps/web/test/web/controllers/bank_account_controller_test.exs",
+          "line": 39,
+          "created_at": "2024-05-14T19:19:57Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/cb_relay/pull/75#discussion_r2788546159",
+          "repo": "cb_relay",
+          "pr_number": 75,
+          "author": "wumbabum",
+          "path": ".agents/skills/create-cb-relay-function-tests/SKILL.md",
+          "line": 185,
+          "created_at": "2026-02-10T15:11:18Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/file_lookup_service/pull/477#discussion_r2288916068",
+          "repo": "file_lookup_service",
+          "pr_number": 477,
+          "author": "jdfrens",
+          "path": "apps/web/test/web/audit_test.exs",
+          "line": 56,
+          "created_at": "2025-08-20T18:03:05Z"
+        }
+      ]
+    }
+  ]
+}

@@ -53,6 +53,8 @@ machine-readable trail from every rule back to the comments behind it.
 | [Unit testing](standards/elixir/unit-testing.md) | ExUnit structure, mocks and Mox, setup, factories, assertions |
 | [Property testing](standards/elixir/property-testing.md) | StreamData generators, `check all`, property invariants |
 | [Tooling](standards/elixir/tooling.md) | deps, mix.exs, formatter, Credo, Dialyzer, CI |
+| [Security](standards/elixir/security.md) | secrets and PII, authorization and IDOR, untrusted input |
+| [OpenAPI schemas](standards/elixir/open-api-specs.md) | OpenApiSpex schemas, operations, and validation |
 
 > [!TIP]
 > New to the codebase? Start with **Principles** for the "why," then **Idioms** for the "how."

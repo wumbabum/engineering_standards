@@ -416,10 +416,6 @@ Do not accept or return `conn` in a helper that neither reads nor modifies it.
 Use `action_fallback` with a `FallbackController` so actions can return error tuples instead
 of rendering errors inline per action.
 
-#### CastAndValidate For Validation Errors
-Let [**OpenApiSpex**](https://hexdocs.pm/open_api_spex/OpenApiSpex.html)'s `CastAndValidate` plug produce
-validation error responses instead of hand-rolling them.
-
 #### Standard HTTP Header Names
 Use standard lowercase, hyphenated HTTP header names, and do not support underscore variants
 or multiple casings.
@@ -427,43 +423,6 @@ or multiple casings.
 #### Reuse Existing Library Functions
 Prefer existing library functions and framework callbacks
 (`Plug.Conn.get_req_header/2`, `HTTPoison.Base`) over reimplementing their behavior.
-
-## OpenApiSpex schemas
-
-#### Nullable Non-Required Fields
-Mark every non-required field nullable with `nullable: true` so casting and struct-to-JSON
-encoding stay valid.
-
-#### Specify Every Action Operation
-When adding [**OpenApiSpex**](https://hexdocs.pm/open_api_spex/OpenApiSpex.html) to a controller, specify or explicitly disable every action's
-operation, or tests fail.
-
-#### Empty Response Body Description
-For a response with no body, give only the description and let `open_api_spex` fill in the
-rest; by convention a 404 needs no response body.
-
-#### Reference Schemas For Refs
-Reference schema modules directly in array items so **OpenApiSpex** emits a `$ref` instead of
-inlining.
-
-#### Literal Data For Examples
-Use plain literal data, not schema modules, for schema examples.
-
-#### List Only Unreferenced Schemas
-List OpenAPI schemas explicitly only when no operation references them, and do not list ones
-already referenced.
-
-#### Record Type Property First
-Place the `record_type` property first in a schema definition.
-
-#### Email Format On Strings
-Use `format: :email` on string schemas to document and validate email fields.
-
-#### View Matches Schema Fields
-Target a view to the fields declared in its OpenAPI schema.
-
-#### Omit Redundant Action Doc
-Omit `@doc` on a controller action when its operation already documents it.
 
 ## GraphQL schemas
 

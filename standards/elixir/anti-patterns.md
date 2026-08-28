@@ -324,14 +324,6 @@ recursion depth. Use a real parser or the AST.
 Keep logic out of Mix tasks. They are hard to test, and a large body of untested task code
 is a smell. Move the logic into tested modules the task calls.
 
-## HTTP and API boundaries
-
-#### OpenAPI Header Parameters
-
-Avoid declaring header parameters with OpenAPI `in: :header`; **open_api_spex** maps the
-header name straight into the params key and distorts it. Read the header explicitly with
-`get_req_header/2` instead.
-
 ## Tests
 
 #### Overusing Mox Stub

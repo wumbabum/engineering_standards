@@ -15,5 +15,7 @@ like `mix format` and Credo cannot, and they guide the Credo checks we add per r
 - [Anti-patterns](anti-patterns.md) - concrete patterns to avoid.
 - [Principles](principles.md) - the design philosophy behind the rules.
 - [Tooling](tooling.md) - deps, formatter, Credo, Dialyzer, and CI configuration.
+- [Security](security.md) - secrets, authorization, and untrusted input.
+- [OpenAPI schemas](open-api-specs.md) - OpenApiSpex schema, operation, and validation conventions.
 
 Planned, not yet authored: umbrella app design.

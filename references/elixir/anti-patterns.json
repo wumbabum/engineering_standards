@@ -1100,21 +1100,6 @@
       ]
     },
     {
-      "name": "OpenAPI Header Parameters",
-      "tags": [],
-      "references": [
-        {
-          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/615#discussion_r2515682592",
-          "repo": "user_management_service",
-          "pr_number": 615,
-          "author": "wumbabum",
-          "path": "apps/web/lib/web/controllers/contact_controller.ex",
-          "line": 26,
-          "created_at": "2025-11-11T20:29:20Z"
-        }
-      ]
-    },
-    {
       "name": "Overusing Mox Stub",
       "tags": [],
       "references": [

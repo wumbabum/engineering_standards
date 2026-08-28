@@ -342,12 +342,6 @@ hardcoding them.
 
 ## Framework specifics
 
-#### Assert OpenAPI Schema Conformance
-
-Assert that controller and API responses conform to their OpenAPI schema with
-`assert_schema`, test only the response statuses the code meaningfully handles, those with
-schemas, and explicitly test that values cast to their schema type.
-
 #### Test Oban Workers Natively
 
 Test **[Oban](https://oban.hexdocs.pm/Oban.html)** workers with the framework's own tools. Use `Oban.Pro.Testing` with

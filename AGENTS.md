@@ -37,9 +37,9 @@ Agent entry point for `engineering_standards` (Euna Payments). Human readers sta
 
 ## Current state
 
-- 11 authored docs, one `#### ` heading per rule, 460 rules total: modules, naming,
+- 12 authored docs, one `#### ` heading per rule, 454 rules total: modules, naming,
   control-structures, idioms, anti-patterns, principles, application-configuration,
-  unit-testing, property-testing, tooling, security.
+  unit-testing, property-testing, tooling, security, open-api-specs.
 - Each doc has a references store of per-rule metadata; the dashboard is generated from docs + stores by
   `scripts/build_dashboard.exs`. `make lint` enforces format + the 1:1 contract. CI runs both.
 - Planning docs and one-off migration helpers live in gitignored `temp/`.

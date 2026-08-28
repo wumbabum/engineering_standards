@@ -2840,48 +2840,6 @@
       ]
     },
     {
-      "name": "Assert OpenAPI Schema Conformance",
-      "tags": [],
-      "references": [
-        {
-          "comment_url": "https://github.com/CityBaseInc/audit_service/pull/30#discussion_r2302046637",
-          "repo": "audit_service",
-          "pr_number": 30,
-          "author": "jdfrens",
-          "path": "apps/web/lib/web/open_api/entry.ex",
-          "line": 30,
-          "created_at": "2025-08-26T20:17:07Z"
-        },
-        {
-          "comment_url": "https://github.com/CityBaseInc/bank_account_service/pull/258#discussion_r1600535941",
-          "repo": "bank_account_service",
-          "pr_number": 258,
-          "author": "jdfrens",
-          "path": "apps/web/test/web/controllers/bank_account_controller_test.exs",
-          "line": 39,
-          "created_at": "2024-05-14T19:19:57Z"
-        },
-        {
-          "comment_url": "https://github.com/CityBaseInc/cb_relay/pull/75#discussion_r2788546159",
-          "repo": "cb_relay",
-          "pr_number": 75,
-          "author": "wumbabum",
-          "path": ".agents/skills/create-cb-relay-function-tests/SKILL.md",
-          "line": 185,
-          "created_at": "2026-02-10T15:11:18Z"
-        },
-        {
-          "comment_url": "https://github.com/CityBaseInc/file_lookup_service/pull/477#discussion_r2288916068",
-          "repo": "file_lookup_service",
-          "pr_number": 477,
-          "author": "jdfrens",
-          "path": "apps/web/test/web/audit_test.exs",
-          "line": 56,
-          "created_at": "2025-08-20T18:03:05Z"
-        }
-      ]
-    },
-    {
       "name": "Test Authentication Paths Honestly",
       "tags": [],
       "references": [
