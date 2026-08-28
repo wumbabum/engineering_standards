@@ -204,21 +204,6 @@
       ]
     },
     {
-      "name": "Future Proof With Expected Matches",
-      "tags": [],
-      "references": [
-        {
-          "comment_url": "https://github.com/CityBaseInc/file_lookup_service/pull/469#discussion_r2236680057",
-          "repo": "file_lookup_service",
-          "pr_number": 469,
-          "author": "jdfrens",
-          "path": "apps/web/lib/web/controllers/obligation_association_controller.ex",
-          "line": 98,
-          "created_at": "2025-07-28T14:16:39Z"
-        }
-      ]
-    },
-    {
       "name": "Assert Types Inside With Clauses",
       "tags": [],
       "references": [
@@ -278,21 +263,6 @@
           "path": "apps/service_tasks/lib/service_tasks/verify_okta_users/user_verifier.ex",
           "line": 43,
           "created_at": "2023-09-11T21:20:05Z"
-        }
-      ]
-    },
-    {
-      "name": "Use If Else For Assignment",
-      "tags": [],
-      "references": [
-        {
-          "comment_url": "https://github.com/CityBaseInc/invoice_service/pull/361#discussion_r1521993149",
-          "repo": "invoice_service",
-          "pr_number": 361,
-          "author": "jdfrens",
-          "path": "apps/core/lib/core/invoices/invoice.ex",
-          "line": 77,
-          "created_at": "2024-03-12T19:09:03Z"
         }
       ]
     },

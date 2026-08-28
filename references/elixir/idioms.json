@@ -1771,7 +1771,7 @@
       ]
     },
     {
-      "name": "Single-Element Required List Inline",
+      "name": "Single Line For Small Literals",
       "tags": [],
       "references": [
         {
@@ -1797,21 +1797,6 @@
           "path": "apps/web/lib/web/open_api/create_password_reset_key_request.ex",
           "line": 13,
           "created_at": "2024-10-04T14:51:39Z"
-        }
-      ]
-    },
-    {
-      "name": "Omit Self-Explanatory Descriptions",
-      "tags": [],
-      "references": [
-        {
-          "comment_url": "https://github.com/CityBaseInc/payment_api/pull/1110#discussion_r1786816143",
-          "repo": "payment_api",
-          "pr_number": 1110,
-          "author": "jdfrens",
-          "path": "apps/web/lib/web/controllers/v1/payment_instrument_controller.ex",
-          "line": 27,
-          "created_at": "2024-10-03T20:36:00Z"
         }
       ]
     },
@@ -1939,21 +1924,6 @@
           "path": "apps/core/lib/core/work/reset_device_worker.ex",
           "line": 101,
           "created_at": "2026-02-26T21:05:57Z"
-        }
-      ]
-    },
-    {
-      "name": "Record Job Output",
-      "tags": [],
-      "references": [
-        {
-          "comment_url": "https://github.com/CityBaseInc/device_payment_service/pull/149#discussion_r2718248302",
-          "repo": "device_payment_service",
-          "pr_number": 149,
-          "author": "wumbabum",
-          "path": "apps/core/lib/core/work/delete_stale_devices_worker.ex",
-          "line": 91,
-          "created_at": "2026-01-22T19:13:25Z"
         }
       ]
     },

@@ -881,23 +881,6 @@
       ]
     },
     {
-      "name": "Oban Plugin Config Placement",
-      "tags": [
-        "oban"
-      ],
-      "references": [
-        {
-          "comment_url": "https://github.com/CityBaseInc/device_payment_service/pull/10#discussion_r1575147169",
-          "repo": "device_payment_service",
-          "pr_number": 10,
-          "author": "jdfrens",
-          "path": "config/runtime.exs",
-          "line": 15,
-          "created_at": "2024-04-22T17:43:26Z"
-        }
-      ]
-    },
-    {
       "name": "Configure Under The Owning Application",
       "tags": [],
       "references": [

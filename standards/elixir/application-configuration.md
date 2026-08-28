@@ -139,10 +139,6 @@ Prefer a behavior default passed through code over a config toggle that forces a
 
 Configure logger backends explicitly, for example `LoggerBackends.add/1`, rather than the deprecated **Logger** `:backends` config.
 
-#### Oban Plugin Config Placement
-
-Put [**Oban**](https://oban.hexdocs.pm/Oban.html) `:plugin` config in `runtime.exs` only when using [**Oban.Pro**](https://oban.pro/docs/pro/overview.html) DynamicCron. Otherwise keep **Oban** config in `config.exs`.
-
 ## Libraries vs applications
 
 #### Configure Under The Owning Application

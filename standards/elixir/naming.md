@@ -120,11 +120,6 @@ Give related fields a shared prefix so they group and alphabetize together.
 
 Avoid words in type and field names that the surrounding context already implies.
 
-#### Choose Non Empty Sentinel Atoms
-
-Choose sentinel atom names that do not imply an empty collection. Prefer `:unset` over
-`:none`.
-
 #### Name The Options Parameter Opts
 
 Name the trailing keyword options parameter `opts`, not `options`. This is a strong, established

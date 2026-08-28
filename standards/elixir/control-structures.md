@@ -99,12 +99,6 @@ with {:ok, response} <- send_request(device_payment),
 end
 ```
 
-#### Future Proof With Expected Matches
-
-Keep a `with` that matches the expected returns even when the call currently always
-succeeds. It future-proofs the code by forcing a revisit here if that contract ever
-changes.
-
 #### Assert Types Inside With Clauses
 
 Put type-asserting pattern matches (for example `%AutopayAgency{} = agency <- ...`) inside
@@ -120,11 +114,6 @@ same value.
 #### Use Cond For Boolean Branches
 
 Use `cond` for multi-branch boolean logic rather than a large nested `if`/`else` block.
-
-#### Use If Else For Assignment
-
-Use a multi-line `if do:/else:` expression for simple conditional value assignment instead
-of imperative reassignment. Treat it as the Elixir stand-in for a ternary.
 
 #### Prefer Case Over Then
 

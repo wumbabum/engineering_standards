@@ -57,6 +57,13 @@ check with `Enum.reject/2` when the left side may contain duplicates.
 
 ## Maps and keyword lists
 
+#### Single Line For Small Literals
+
+Keep a small literal on one line. When a sigil, list, or map holds fewer than three elements,
+write it inline, and break it across multiple lines only once it reaches three or more elements
+or grows too long to read on one line. This keeps trivially short collections from eating
+vertical space.
+
 #### Update Or Default In Place
 Use `Map.update/4` to update-or-default a key in place instead of extracting the value,
 transforming it, and recombining variables.
@@ -449,15 +456,8 @@ already referenced.
 #### Record Type Property First
 Place the `record_type` property first in a schema definition.
 
-#### Single-Element Required List Inline
-Put a single-element required list on one line for a response schema that has only a `data`
-property.
-
 #### Email Format On Strings
 Use `format: :email` on string schemas to document and validate email fields.
-
-#### Omit Self-Explanatory Descriptions
-Omit `:description` when the field name is already self-explanatory.
 
 #### View Matches Schema Fields
 Target a view to the fields declared in its OpenAPI schema.
@@ -477,9 +477,6 @@ In [**Absinthe**](https://hexdocs.pm/absinthe/Absinthe.html) schemas, mark field
 #### Args Schema For Workers
 Define an `args_schema` for [**Oban Pro**](https://oban.pro/docs/pro/overview.html) workers. It casts args to a struct with atom keys, so
 match the struct rather than string keys.
-
-#### Record Job Output
-Set `recorded: true` to keep job output visible in the dashboard.
 
 #### Avoid Extra Queues
 Avoid creating extra queues unnecessarily, since each queue consumes PostgreSQL connections.

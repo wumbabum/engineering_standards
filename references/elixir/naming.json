@@ -521,21 +521,6 @@
       ]
     },
     {
-      "name": "Choose Non Empty Sentinel Atoms",
-      "tags": [],
-      "references": [
-        {
-          "comment_url": "https://github.com/CityBaseInc/cb_auth/pull/14#discussion_r2432917863",
-          "repo": "cb_auth",
-          "pr_number": 14,
-          "author": "jdfrens",
-          "path": "lib/cb_auth.ex",
-          "line": 298,
-          "created_at": "2025-10-15T14:59:51Z"
-        }
-      ]
-    },
-    {
       "name": "Name Modules For Responsibility",
       "tags": [],
       "references": [
