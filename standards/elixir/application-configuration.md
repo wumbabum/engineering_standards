@@ -12,15 +12,11 @@ Keep static values in the compile-time config files (`config.exs` and the per-en
 
 Read compile-time config with `Application.compile_env/2` or `/3`, assigning it to a module attribute or reading it in the module body, so the compiler does not warn about a runtime lookup of a value fixed at compile time.
 
-```elixir
-@timeout Application.compile_env(:invoice_service, :timeout, 5_000)
-```
-
 Use `Application.get_env` for values read at runtime and `compile_env` for values baked in at compile time.
 
 #### Pass Runtime Values As Functions
 
-Pass a value that must be evaluated at runtime as a function or MFA rather than as a compile-time config call, so it resolves when invoked and not once at build.
+Pass a value that must be evaluated at runtime as a function reference or MFA rather than as a compile-time config call, so it resolves when invoked and not once at build. For example, pass `&Web.Auth.okta_issuer/0` rather than the call `Web.Auth.okta_issuer()`.
 
 #### System Env Calls In Runtime
 
@@ -46,9 +42,19 @@ Keep configuration in `config/*.exs` and read it through the `Application` env r
 
 Read required configuration with `System.fetch_env!/1` or `Keyword.fetch!/2` so a missing or misconfigured value crashes the app at startup instead of yielding `nil` and failing obscurely later. In prod, required env vars use `fetch_env!`; dev and other optional reads use `get_env` with a default.
 
+Split the read by environment: an optional default locally, a required fetch in prod.
+
 ```elixir
 # runtime.exs
-config :invoice_service, :api_key, System.fetch_env!("API_KEY")
+case config_env() do
+  :dev ->
+    # optional locally: a dev need not set it
+    config :invoice_service, :api_key, System.get_env("API_KEY", "dev-api-key")
+
+  :prod ->
+    # required in every deployment: crash at startup if unset
+    config :invoice_service, :api_key, System.fetch_env!("API_KEY")
+end
 ```
 
 #### Defaults For Optional Config
@@ -93,11 +99,6 @@ Read secrets and tokens from environment variables in runtime config, per enviro
 
 Namespace application config under the app or consuming-module name, mapping it to a keyword list. Group related keys under one namespacing key, and prefer generic, extensible names over ambiguous ones or names coupled to a single consumer.
 
-```elixir
-config :cb_pos_bridge, :feature_flags,
-  adapter: CbPosBridge.FeatureFlags.LaunchDarklyAdapter
-```
-
 #### Consistent Structure Read With Get In
 
 Keep config structure consistent and strict, and read nested config with `get_in/2`.
@@ -136,7 +137,7 @@ Prefer a behavior default passed through code over a config toggle that forces a
 
 #### Configure Logger Backends Explicitly
 
-Configure logger backends explicitly, for example `LoggerBackends.add/1`, rather than the deprecated `:backends` config.
+Configure logger backends explicitly, for example `LoggerBackends.add/1`, rather than the deprecated **Logger** `:backends` config.
 
 #### Oban Plugin Config Placement
 

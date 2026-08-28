@@ -39,14 +39,21 @@ avoids forgotten-sort bugs.
 Prefer `Enum.reduce/3` over hand-written recursion when folding a set of conditions or values
 into a result.
 
+Prefer:
+```elixir
+Enum.reduce(params, query, fn param, query -> apply_param(query, param) end)
+```
+
+Over:
+```elixir
+defp build(query, []), do: query
+defp build(query, [param | rest]), do: query |> apply_param(param) |> build(rest)
+```
+
 #### Avoid List Subtraction When Lists May Contain Duplicates
 `Kernel.--/2` removes only the first matching occurrence of each element, so `list -- to_remove`
 silently leaves duplicates behind when the left list repeats a value. Reach for a membership
 check with `Enum.reject/2` when the left side may contain duplicates.
-
-```elixir
-Enum.reject(locations, &(&1.bid_zone in filtered_zones))
-```
 
 ## Maps and keyword lists
 
@@ -71,13 +78,6 @@ list, whose key order is significant.
 Fetch required options with `Keyword.fetch!/2` so they fail fast at the source, and give
 optional ones defaults with `Keyword.get/3`.
 
-```elixir
-def run(opts) do
-  repo = Keyword.fetch!(opts, :repo)
-  batch = Keyword.get(opts, :batch_size, 500)
-end
-```
-
 #### Opts As Trailing Keyword List
 Accept `opts` as a trailing keyword list, not a map and not a fixed keyword pattern.
 
@@ -95,10 +95,6 @@ Forward only the relevant options to a downstream call with `Keyword.take/2`.
 When you must turn incoming string keys into atoms, use `String.to_existing_atom/1` so untrusted
 input cannot exhaust the atom table. This is the safe companion to the anti-pattern against
 creating atoms from external input: convert only to atoms that already exist.
-
-```elixir
-Enum.into(params, [], fn {k, v} -> {String.to_existing_atom(k), v} end)
-```
 
 ## Structs, strings, and sigils
 
@@ -130,6 +126,18 @@ Test against several sentinel values with a membership check, for example `value
 #### Path And URI Modules
 Build and manipulate paths and URLs with the `Path` and `URI` modules, not manual string
 handling or concatenation, so redundant slashes and encoding are handled for you.
+
+Prefer:
+```elixir
+Path.join(["/", client_slug, sub_client_slug, path])
+base |> URI.parse() |> URI.append_query(query) |> URI.to_string()
+```
+
+Over:
+```elixir
+"/" <> client_slug <> "/" <> sub_client_slug <> "/" <> path
+base <> "?" <> query
+```
 
 #### Decimal From String
 Prefer `Decimal.new/1` with a string over `Decimal.from_float/1` to avoid float inaccuracy.
@@ -178,37 +186,15 @@ Give every clause of a function the same `do` style. If one clause uses a `do ..
 (or spans multiple lines), write every clause of that function that way rather than mixing the
 `do:` shorthand with the block form.
 
-```elixir
-defp role_agencies(:cb_admin, _conn) do
-  :all
-end
-
-defp role_agencies(_role, conn) do
-  filtered_agencies(conn)
-end
-```
-
 #### Do Not Extract Trivial Pass-Through Helpers
 Do not extract a helper that hides meaning without saving much, such as a one-line wrapper or a
 `do_*` function that only delegates to another. Inline it instead, or, when you want the clauses
 named, make the function public with multiple clauses rather than a private delegator. A pipeline
 is allowed on a single line.
 
-```elixir
-conn |> put_status(200) |> json(%{redirect_uri: checkout_uri})
-```
-
 #### Guard Optional Dependencies With Code.ensure_loaded?
 Wrap a module that uses an optional dependency in `if Code.ensure_loaded?(Dep) do ... end`, so it
 compiles only when that dependency is present in the host application.
-
-```elixir
-if Code.ensure_loaded?(AirbrakeClient) do
-  defmodule CBRelay.AirbrakeReport do
-    # ...
-  end
-end
-```
 
 ## Return values and error tuples
 
@@ -218,11 +204,8 @@ failures.
 
 #### Descriptive Error Reason Atoms
 Use atoms for internal error reasons and reserve strings for front-end-facing values.
-Include a descriptive reason atom, and context, to aid debugging.
-
-```elixir
-{:error, :failed_s3_upload, response: response}
-```
+Include a descriptive reason atom, and context, to aid debugging, as in
+`{:error, :failed_s3_upload, response: response}`.
 
 #### Consistent Not Found Result
 Use `{:error, :not_found}` consistently across the codebase for not-found results.
@@ -234,6 +217,21 @@ plain values or always tagged tuples, and if any path returns a tuple, every pat
 #### Wrap Third-Party Errors
 Convert third-party errors such as `HTTPoison.Error` into your own declared return types
 rather than passing them through unchanged.
+
+Prefer:
+```elixir
+def report_payment(payment) do
+  case HTTPoison.post(url, encode(payment)) do
+    {:ok, response} -> {:ok, response}
+    {:error, %HTTPoison.Error{reason: reason}} -> {:error, {:http_error, reason}}
+  end
+end
+```
+
+Over:
+```elixir
+def report_payment(payment), do: HTTPoison.post(url, encode(payment))
+```
 
 #### Accessors Return Value Or Nil
 Make accessor and `get_by`-style functions return the raw value or `nil`, like
@@ -259,11 +257,7 @@ Prefer `cast/3` or `put_assoc/3` over `put_change/3` for setting fields and asso
 
 #### Default Changeset Struct Parameter
 Give a changeset function a first parameter defaulting to the module struct for the current
-data:
-
-```elixir
-def changeset(data \\ %__MODULE__{}, params) do
-```
+data, as in `def changeset(data \\ %__MODULE__{}, params)`.
 
 #### Insert Through Validated Changeset
 Insert records through a validated changeset, not a raw struct.
@@ -372,13 +366,6 @@ Write DSL macro calls without parentheses: router `plug`, `pipe_through`, and `g
 `operation`. Once the DSL's library is listed in `import_deps` in `.formatter.exs` (see tooling),
 the formatter stops injecting the parentheses. Parentheses on these calls are a sign of an older
 app written before the deps were imported.
-
-```elixir
-pipe_through :open_api
-plug :accepts, ["json"]
-field :approved, :boolean
-```
-
 Starting an **Ecto** query with `from x in scope,` likewise lets the formatter handle the rest
 without wrapping parentheses.
 
@@ -437,7 +424,8 @@ Prefer existing library functions and framework callbacks
 ## OpenApiSpex schemas
 
 #### Nullable Non-Required Fields
-Mark every non-required field nullable so casting and struct-to-JSON encoding stay valid.
+Mark every non-required field nullable with `nullable: true` so casting and struct-to-JSON
+encoding stay valid.
 
 #### Specify Every Action Operation
 When adding [**OpenApiSpex**](https://hexdocs.pm/open_api_spex/OpenApiSpex.html) to a controller, specify or explicitly disable every action's
@@ -555,11 +543,6 @@ will address it, so a project-wide search finds it.
 #### Extract Constants To Attributes
 Extract repeated hardcoded values and magic numbers into named module attributes, and expose
 a shared list through a public accessor so callers and tests never duplicate the literal.
-
-```elixir
-@app_slugs ~w(audit payments relay)
-def app_slugs, do: @app_slugs
-```
 
 #### Sort Literal Lists Alphabetically
 Keep literal value lists and enum lists sorted alphabetically.

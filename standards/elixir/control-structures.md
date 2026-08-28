@@ -16,13 +16,6 @@ private function per step so the happy path reads straight down the `with` and e
 translates its own errors. This collapses the duplicated `{:error, _}` passing that nested
 `case` expressions force on you.
 
-```elixir
-with {:ok, merchant} <- fetch_merchant(params),
-     {:ok, payment} <- submit(merchant, params) do
-  render(payment)
-end
-```
-
 #### Reserve With For Result Tuples
 
 Reserve `with/1` for chains of `:ok`/`:error` tuples, where you are operating under
@@ -35,6 +28,26 @@ Do not reach for `with` when no pattern matching or failure branching happens. I
 is being matched, use `=`. For a single condition, use a plain `if`; for a one-clause
 `with`, a simpler construct communicates the flow better.
 
+The `<-` here matches nothing, so `with` only adds a level of indentation.
+
+Prefer:
+```elixir
+token = get_token(conn)
+
+if valid_token?(token),
+  do: Plug.Conn.put_private(conn, :authentication_issuer, :static_token),
+  else: conn
+```
+
+Over:
+```elixir
+with token <- get_token(conn) do
+  if valid_token?(token),
+    do: Plug.Conn.put_private(conn, :authentication_issuer, :static_token),
+    else: conn
+end
+```
+
 #### Keep With Else Minimal
 
 Keep the `else` minimal. Drop a no-op `else` that only returns what it received: a `with`
@@ -43,11 +56,48 @@ and a pass-through `else` can convert a returned error into a `WithClauseError` 
 When error handling is real, extract it into local functions that return their own
 `:error` tuples rather than growing a complex `else`.
 
+Prefer:
+```elixir
+with :ok <- validate_captcha(provider, token),
+     :ok <- validate_user_jwt(context, client_slug, user_id) do
+  do_call(topic, message, context)
+end
+```
+
+Over:
+```elixir
+with :ok <- validate_captcha(provider, token),
+     :ok <- validate_user_jwt(context, client_slug, user_id) do
+  do_call(topic, message, context)
+else
+  {:error, reason} -> {:error, reason}
+end
+```
+
 #### Keep With Bodies Flat
 
 Keep `with` bodies flat. Do not nest a `case` inside a `with` body, and do not call
 **Logger** in `<-` clauses. Push that work into named helper functions; a **Logger** call in a
 match clause is a smell.
+
+Prefer:
+```elixir
+with {:ok, response} <- send_request(device_payment),
+     {:ok, body} <- Jason.decode(response.body) do
+  process_reset_body(body)
+end
+```
+
+Over:
+```elixir
+with {:ok, response} <- send_request(device_payment),
+     {:ok, body} <- Jason.decode(response.body) do
+  case body do
+    %{"status" => "approved"} -> {:ok, :reset}
+    %{"status" => status} -> {:error, status}
+  end
+end
+```
 
 #### Future Proof With Expected Matches
 
@@ -57,12 +107,8 @@ changes.
 
 #### Assert Types Inside With Clauses
 
-Put type-asserting pattern matches inside `with` clauses rather than on bare variables or
-in over-deconstructed function heads.
-
-```elixir
-with %AutopayAgency{} = agency <- socket.assigns.selected_autopay_agency do
-```
+Put type-asserting pattern matches (for example `%AutopayAgency{} = agency <- ...`) inside
+`with` clauses rather than on bare variables or in over-deconstructed function heads.
 
 ## Choosing between `case`, `cond`, `if`, and `unless`
 
@@ -70,14 +116,6 @@ with %AutopayAgency{} = agency <- socket.assigns.selected_autopay_agency do
 
 Use a single `case` over a value instead of repeating multiple `if` checks against that
 same value.
-
-```elixir
-case config_env() do
-  :prod -> ...
-  :dev -> ...
-  :test -> nil
-end
-```
 
 #### Use Cond For Boolean Branches
 
@@ -87,13 +125,6 @@ Use `cond` for multi-branch boolean logic rather than a large nested `if`/`else`
 
 Use a multi-line `if do:/else:` expression for simple conditional value assignment instead
 of imperative reassignment. Treat it as the Elixir stand-in for a ternary.
-
-```elixir
-status =
-  if invoice.paid_at,
-    do: :paid,
-    else: :pending
-```
 
 #### Prefer Case Over Then
 
@@ -110,25 +141,32 @@ off a single parameter. Replace Rails-style conditional dispatch with a private 
 that pattern-matches its input, and prefer function-head clauses over a module-attribute
 map for a simple keyed lookup.
 
+Prefer:
+```elixir
+defp response_module(%{"slim" => slim}) when slim in ["true", true], do: SlimSearchResponse
+defp response_module(_params), do: SearchResponse
+```
+
+Over:
+```elixir
+response_module =
+  if params["slim"] in ["true", true] do
+    SlimSearchResponse
+  else
+    SearchResponse
+  end
+```
+
 #### Match Structs In Function Heads
 
-Pattern-match structs in function heads for compile-time safety on field access, and skip
-redundant field lookups the matched struct already guarantees.
-
-```elixir
-def call(%Topic{} = topic, message, context) do
-  # topic.client_slug is confirmed safe at compile time
-end
-```
+Pattern-match structs in function heads (for example `def call(%Topic{} = topic, ...)`) for
+compile-time safety on field access, and skip redundant field lookups the matched struct
+already guarantees.
 
 #### Extract First Element By Pattern
 
-Extract a list's first element with a function-head pattern and a shape guard rather than
-`List.first` plus `Map.get`.
-
-```elixir
-defp get_account_status_code([%{} = item | _]), do: ...
-```
+Extract a list's first element with a function-head pattern and a shape guard like
+`[%{} = item | _]` rather than `List.first` plus `Map.get`.
 
 #### Single Clause For Simple Booleans
 
@@ -140,6 +178,28 @@ clauses when the logic is simple boolean logic and one line says it clearly.
 Keep matches in `case` and function heads minimal, and destructure further in the body.
 Use `_` for values when matching only on keys, since the keys already give the context.
 
+Prefer:
+```elixir
+defp report_payment_body(%DevicePayment{} = device_payment) do
+  build(
+    device_payment.payment_attempt_unique_identifier,
+    device_payment.amount,
+    device_payment.visit_id
+  )
+end
+```
+
+Over:
+```elixir
+defp report_payment_body(%DevicePayment{
+       payment_attempt_unique_identifier: id,
+       amount: amount,
+       visit_id: visit_id
+     }) do
+  build(id, amount, visit_id)
+end
+```
+
 ## Function clauses: ordering, combining, and fallbacks
 
 #### Order Clauses Deliberately And Consistently
@@ -150,14 +210,8 @@ which the cases should be considered.
 
 #### Combine Identical Clauses With Guards
 
-Combine clauses that share identical logic into one, using a guard such as `in` a list
+Combine clauses that share identical logic into one, using a guard such as `when x in [...]`
 where the shared cases differ only by value.
-
-```elixir
-defp authorized_agencies_for_role(role, _conn) when role in [:cb_admin, :client_admin] do
-  :all
-end
-```
 
 #### Add Fallback Clause For Fallthrough
 
@@ -190,7 +244,8 @@ Extract reusable boolean preconditions into guards with `defguard` so heads stay
 
 Prefer positive logic over negated conditions, since negated logic is harder to reason
 through. Use positive guards (`in`) over `not in`, and reorder the clauses so the positive
-form comes first. Prefer `length/1` and positive checks over their negations.
+form comes first. Prefer `length/1` and positive checks over their negations, for example
+`length(list) > 0` over `not Enum.empty?(list)`.
 
 #### Constrain Broad Tuple Patterns
 
@@ -204,10 +259,6 @@ A head like `walk({type, content}, ...)` matches every 2-tuple; narrow it so a s
 
 Use `and`/`or` for boolean computations, and reserve `&&`/`||` for returning non-boolean
 values. This is the opposite of most other languages.
-
-```elixir
-if assigns[:internal_device_identifier] != nil and assigns[:dps_status] == "Enrolled" do
-```
 
 #### Order Conditions For Short Circuiting
 
@@ -236,15 +287,6 @@ visible so a reader does not miss them.
 Chain a `case` into the pipeline with `|> case do` rather than breaking the pipe to hold a
 variable. Keep the whole flow in one pipeline, with each branch returning its value.
 
-```elixir
-result
-|> Repo.update()
-|> case do
-  {:ok, record} -> ...
-  {:error, changeset} -> ...
-end
-```
-
 ## Control flow shape: flatten and extract
 
 #### Flatten Nested Control Flow
@@ -253,19 +295,41 @@ Flatten nested `case`/`if` control flow into separate function clauses or extrac
 helper functions. A body that nests `case` inside `if` inside `case` is hard to test and
 hard to read; small named functions and pipes make the flow visible.
 
+Prefer:
+```elixir
+defp process_body(%{"status" => "success", "data" => %{"payments" => []}}),
+  do: {:error, :not_found}
+
+defp process_body(%{"status" => "success", "data" => %{"payments" => [%{"status" => "approved"} = payment | _]}}),
+  do: {:ok, payment}
+
+defp process_body(%{"status" => "success"}), do: {:error, :not_approved}
+defp process_body(_body), do: {:error, :bad_response}
+```
+
+Over:
+```elixir
+case body do
+  %{"status" => "success", "data" => %{"payments" => payments}} ->
+    if payments == [] do
+      {:error, :not_found}
+    else
+      case List.first(payments) do
+        %{"status" => "approved"} = payment -> {:ok, payment}
+        _ -> {:error, :not_approved}
+      end
+    end
+
+  _ ->
+    {:error, :bad_response}
+end
+```
+
 #### Separate Normal Flow From Errors
 
 Separate normal flow from error handling. Delegate the branches to small named helper
 functions so an `if/do/else` reduces to simple calls and can use the keyword `do:`/`else:`
 notation.
-
-```elixir
-def call(conn, opts) do
-  if static_token?(conn, opts),
-    do: process_static_token(conn, opts),
-    else: process_jwt(conn, opts)
-end
-```
 
 ## Recursion and fail-fast
 
@@ -273,6 +337,28 @@ end
 
 Implement recursive base cases as separate function clauses instead of branching inside
 the recursive body.
+
+Prefer:
+```elixir
+defp clear_all_sessions(nil, _config), do: :ok
+
+defp clear_all_sessions(url, config) do
+  {:ok, next_url} = fetch_page(url, config)
+  clear_all_sessions(next_url, config)
+end
+```
+
+Over:
+```elixir
+defp clear_all_sessions(url, config) do
+  if is_nil(url) do
+    :ok
+  else
+    {:ok, next_url} = fetch_page(url, config)
+    clear_all_sessions(next_url, config)
+  end
+end
+```
 
 #### Validate Up Front Not Recursively
 
@@ -288,3 +374,23 @@ Match a function's raising behavior to the contract its callers rely on. If call
 it as returning `{:ok, _}`/`{:error, _}`, use non-bang calls (or a targeted `rescue`) so
 it never raises past that contract, and rescue only the specific exception you expect
 rather than a bare `rescue` that swallows everything.
+
+Prefer:
+```elixir
+def fetch(payment_id) when is_integer(payment_id) do
+  case gateway().get("/payments/#{payment_id}", []) do
+    {:ok, response} -> format_response(response)
+    {:error, reason} -> {:error, reason}
+  end
+end
+```
+
+Over:
+```elixir
+# callers treat this as {:ok, _} | {:error, _}, but get!/2 raises on transport errors
+def fetch(payment_id) when is_integer(payment_id) do
+  "/payments/#{payment_id}"
+  |> gateway().get!([])
+  |> format_response()
+end
+```

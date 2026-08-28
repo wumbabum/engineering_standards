@@ -24,6 +24,17 @@ Use aliases consistently within a module. Group them into logical clusters, for 
 base modules separate from their `.Multi` submodules, or infrastructure separate from
 domain, rather than collapsing everything into one long combined alias.
 
+Prefer:
+```elixir
+alias Core.{Change, Entry, Repo}
+alias Core.{AdminMulti, ObjectMulti, UserMulti}
+```
+
+Over:
+```elixir
+alias Core.{AdminMulti, Change, Entry, ObjectMulti, Repo, UserMulti}
+```
+
 #### Remove Unused And Redundant Aliases
 Remove aliases that are unused, and remove redundant aliases that only rename a module to
 its own name.
@@ -54,6 +65,21 @@ calling **Repo** directly. Workers coordinate; the context owns persistence.
 #### Keep Pure Functions Free Of Database
 Keep parsing and other pure functions free of database access. Resolve data needs at the
 domain boundary and pass plain data into the pure function.
+
+Prefer:
+```elixir
+def select_sale_transaction(buffer, user_trace, competing_attempts) do
+  # ...match against competing_attempts...
+end
+```
+
+Over:
+```elixir
+def select_sale_transaction(buffer, user_trace) do
+  competing = Repo.all(from a in Attempt, where: a.user_trace == ^user_trace)
+  # ...match against competing...
+end
+```
 
 #### Confine Framework Dependencies To Component Apps
 Confine framework-specific dependencies such as [**Oban**](https://oban.hexdocs.pm/Oban.html) and **Phoenix** to their own component
@@ -86,11 +112,6 @@ core modules.
 Define a shared value list once, as a module attribute exposed through a public accessor,
 and drive all callers, generators, and tests from that single source.
 
-```elixir
-@app_slugs ~w(payments audit relay)
-def app_slugs, do: @app_slugs
-```
-
 #### Extract Duplicated Type Definitions
 Extract duplicated `@type` definitions into a shared module. If duplication is genuinely
 necessary, comment why, since `defdelegate` does not carry types across module boundaries.
@@ -106,6 +127,26 @@ hold distinct concerns or becomes too large to review comfortably.
 #### Keep Macros Minimal
 Keep macros minimal. Have `__using__` emit a one-line delegation to a regular function
 that holds the logic.
+
+Prefer:
+```elixir
+defmacro __using__(_opts) do
+  quote do
+    def handle_errors(conn, error), do: SanitizedAirbrake.handle_errors(conn, error)
+  end
+end
+```
+
+Over:
+```elixir
+defmacro __using__(_opts) do
+  quote do
+    def handle_errors(conn, error) do
+      # ...35 lines of logic copied into each caller...
+    end
+  end
+end
+```
 
 #### Separate Behaviour From Implementation
 Keep a behaviour definition separate from its implementations. Do not place an
@@ -156,11 +197,8 @@ attribute.
 Separate `plug` declarations from alias directives with a blank line as well.
 
 #### Define Struct Type Via MODULE
-Define a struct or schema's type using `__MODULE__`:
-
-```elixir
-@type t :: %__MODULE__{name: String.t()}
-```
+Define a struct or schema's type using `__MODULE__`, as in
+`@type t :: %__MODULE__{name: String.t()}`.
 
 #### Name Type Aliases For Intent
 Introduce named `@type`/`@typep` aliases to document intent, even when the underlying type
@@ -172,6 +210,18 @@ is `any()`.
 Define a separate `@callback` for each arity, since callbacks cannot have optional or
 default arguments.
 
+Prefer:
+```elixir
+@callback check_captcha(response :: String.t()) :: :ok | :error
+@callback check_captcha(response :: String.t(), provider :: String.t()) :: :ok | :error
+```
+
+Over:
+```elixir
+@callback check_captcha(response :: String.t(), provider :: String.t() \\ "default") ::
+            :ok | :error
+```
+
 #### Name Callback Spec Parameters
 Name the parameters in `@callback` specs. They are valuable documentation even though a
 `@spec` sitting next to its function can omit them.
@@ -182,11 +232,6 @@ the very next line, so repeating them in the spec is noise. Name parameters in a
 `@callback`, where no `def` is alongside (see "Name Callback Spec Parameters"), and leave
 them out of the `@spec`.
 
-```elixir
-@spec render(String.t(), params()) :: ContactsResponse.t()
-def render(template, params) do
-```
-
 #### Do Not Repeat Callback Specs
 Do not repeat a `@spec` on a callback implementation. Rely on the behaviour's callback
 spec through `@impl`.
@@ -194,10 +239,6 @@ spec through `@impl`.
 #### Write Full Behaviour Module Name
 In `@behaviour` and `@impl`, write the full behaviour module name rather than `@impl true`
 or an alias. It documents intent, and the compiler checks it.
-
-```elixir
-@impl Core.Ingest.FileTransfer.Sftp.Behaviour
-```
 
 ## Documentation
 
@@ -272,11 +313,6 @@ is a `map()` to Dialyzer, so a `map()` spec already accepts struct arguments.
 In `@spec` and `@type`, reference a type such as `Module.t()`, not a struct literal like
 `%Module{}`. A struct literal is a value, not a type, and specs need the `t()` type the
 struct module defines.
-
-```elixir
-@spec payment_refund_receipt_email(Transaction.t()) ::
-        {:ok, MessageResponse.t()} | {:error, GatewayBehaviour.error()}
-```
 
 #### Model Constrained Values With `@type`, Not Literal-Union Specs
 Model a constrained value with a named `@type`, not a bare `atom()` or `String.t()` and

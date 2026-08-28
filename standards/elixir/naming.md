@@ -37,9 +37,10 @@ and rename the function when its behavior changes (`enqueue_workers`, not `backf
 #### Avoid Vague Function Names
 
 Avoid vague or misleading function names. Do not lean on suffixes like `handler` or
-`error_handler`, do not prefix internal functions with `do_`, and do not use a name that
-implies behavior the code lacks, such as `filter` for something that does not filter.
-Give the function a name that describes its action.
+`error_handler`, do not prefix internal functions with `do_` (a `do_`-prefixed name states
+the mechanism, not the action, so prefer `create_payment_instrument` over `do_call`), and
+do not use a name that implies behavior the code lacks, such as `filter` for something that
+does not filter. Give the function a name that describes its action.
 
 #### Share Names Only When Semantics Match
 
@@ -49,7 +50,8 @@ only when their semantics match.
 #### Question Mark For Booleans
 
 Suffix a function with `?` only when it returns a boolean. Rename it if it returns an
-ok/error tuple. When one predicate name has to cover two meanings, split it into two
+ok/error tuple, so prefer `authorize` over `authorized?` when the return is `:ok |
+{:error, reason}`. When one predicate name has to cover two meanings, split it into two
 clearly-named predicate functions instead.
 
 #### Keep Related Naming Consistent
@@ -102,7 +104,8 @@ for the changes.
 #### Do Not Abbreviate Names
 
 Do not abbreviate. Use full descriptive words for variables, parameters, and typespecs,
-and prefer standard idiomatic Elixir names without unnecessary words.
+so prefer `obligation_association` over `oa`, and prefer standard idiomatic Elixir names
+without unnecessary words.
 
 #### Name Numeric Values With Units
 
@@ -144,9 +147,9 @@ common libraries.
 
 #### Suffix Context Modules With API
 
-Name context and API modules with the entity as a prefix and an `API` suffix, for example
-`Core.BankAccountAPI`. Do not nest them under a shared `API` namespace or folder that
-forces alias renaming.
+Name context and API modules with the entity as a prefix and an `API` suffix, so prefer
+`Core.BankAccountAPI` over `Core.API.BankAccount`. Do not nest them under a shared `API`
+namespace or folder that forces alias renaming.
 
 #### Name Files After Modules
 
@@ -159,13 +162,15 @@ files to match the module under test.
 Follow [**Phoenix**](https://hexdocs.pm/phoenix/Phoenix.html) conventions for plug modules. Name a plug descriptively for what it does to
 the request and suffix it with `Plug` (`Web.<Name>Plug`), matching the controller and view
 pattern, while omitting the `Plugs` namespace segment and avoiding long runs of
-capitalized acronyms.
+capitalized acronyms, so prefer `Web.OktaJWTAuthenticationPlug` over
+`Web.Plugs.OktaJWTAuthentication`.
 
 #### Follow Phoenix Controller Conventions
 
 Follow **Phoenix** conventions for controllers and views. Omit the `Controllers` segment from
-controller module names, and suffix JSON view modules with `JSON`, placing them in the
-controllers directory.
+controller module names, so prefer `Web.PersonController` over `Web.Controllers.PersonController`,
+and suffix JSON view modules with `JSON`, so prefer `Web.PersonJSON` over `Web.SSO.PersonView`,
+placing them in the controllers directory.
 
 ## Domain vocabulary and accurate names
 

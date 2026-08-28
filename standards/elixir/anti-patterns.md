@@ -30,6 +30,27 @@ step call a private function that returns already-shaped tagged tuples and route
 through a fallback, so the `with` needs no `else`. The same applies to a single-clause
 `with` that exists only to attach an `else`.
 
+Prefer:
+
+```elixir
+with {:ok, profile} <- fetch_profile(id),
+     :ok <- ensure_no_contact(profile) do
+  create_contact(profile)
+end
+```
+
+Over:
+
+```elixir
+with %Profile{} = profile <- Repo.get(Profile, id),
+     [] <- Contacts.list_by(profile) do
+  create_contact(profile)
+else
+  nil -> {:error, :not_found}
+  [_ | _] -> {:error, :already_exists}
+end
+```
+
 #### Try Rescue And Throw Catch
 
 Avoid `try`/`rescue` and `throw`/`catch`. They are extremely rare in idiomatic Elixir.
@@ -51,15 +72,6 @@ access chains that must succeed, catch-all error clauses for cases you have not 
 checks a plug already performs. Let it crash. Surface the violation while writing tests,
 fix it, and trust the invariant thereafter.
 
-```elixir
-# Avoid: guarding a chain the system guarantees
-def email(profile) do
-  if profile && profile.credential_set, do: profile.credential_set.email
-
-# Prefer: assert it
-def email(profile), do: profile.credential_set.email
-```
-
 Prefer `Enum.map` over `Enum.each` where the mapped results aid debugging.
 
 ## Error handling and results
@@ -67,15 +79,8 @@ Prefer `Enum.map` over `Enum.each` where the mapped results aid debugging.
 #### Bare String Error Reasons
 
 Do not return bare string reasons in `:error` tuples. Callers cannot pattern match on a
-string, and the failure detail is lost. Return structured, matchable data.
-
-```elixir
-# Avoid
-{:error, "failed to upload to S3"}
-
-# Prefer
-{:error, :failed_s3_upload, response: response}
-```
+string, and the failure detail is lost. Return structured, matchable data such as
+`{:error, :failed_s3_upload, response: response}`.
 
 #### Result Tuples As Arguments
 
@@ -135,28 +140,12 @@ essentially cannot fail, does not belong at those levels and often does not need
 all. Log it at `:info` or `:debug`, or drop it. Match the level to how surprising the event
 is, not to the shape of the code path.
 
-```elixir
-# Avoid: a not-found is expected, not a warning
-_ -> Logger.warning("bank account not found")
-
-# Prefer
-_ -> Logger.info("bank account not found")
-```
-
 #### Give Error And Airbrake Notices Actionable Context
 
 An error log or **Airbrake** notice that is too vague gives no way to triage it. A bare
 `"Failed to lookup obligation association"` needs the identifying context: the relevant id,
 the failure `reason`, and the params that produced it. Pass specific fields rather than a
 whole struct (see `Inspecting Structs Into Logs`).
-
-```elixir
-# Avoid
-Airbrake.report(message: "Failed to lookup obligation association")
-
-# Prefer
-Airbrake.report([message: "Failed to lookup obligation association"], params: params)
-```
 
 ## Modules and organization
 
@@ -195,6 +184,30 @@ bloats every caller, and an overridable hook is premature until something actual
 overrides it. Use plain functions, first-class functions, or optional keyword arguments
 unless you genuinely need `unquote`, the `opts` parameter, or context like `__MODULE__`.
 
+Prefer:
+
+```elixir
+defmodule Core.Vendor.Datacap do
+  def emv_sale(payment, opts \\ []) do
+    details = Keyword.get(opts, :additional_details, %{})
+    ...
+  end
+end
+```
+
+Over:
+
+```elixir
+defmodule Core.Vendor.Datacap do
+  defmacro __using__(_opts) do
+    quote do
+      def emv_sale(payment), do: ...
+      def additional_details(_payment), do: %{}
+    end
+  end
+end
+```
+
 #### Long Using Macros
 
 Keep macros minimal, and do not disable lint rules to allow a long one. A `__using__/1`
@@ -230,7 +243,7 @@ params instead.
 #### Matching On Keyword Lists
 
 Do not pattern-match on keyword lists; their order is significant, so a match almost never
-holds.
+holds. Fetch by key with `Keyword.fetch!/2` instead.
 
 #### Depending On Map Ordering
 
@@ -315,8 +328,8 @@ is a smell. Move the logic into tested modules the task calls.
 #### OpenAPI Header Parameters
 
 Avoid declaring header parameters with OpenAPI `in: :header`; **open_api_spex** maps the
-header name straight into the params key and distorts it. Read the header explicitly
-instead.
+header name straight into the params key and distorts it. Read the header explicitly with
+`get_req_header/2` instead.
 
 ## Tests
 

@@ -83,7 +83,7 @@ Prefer `== nil` over `is_nil/1` for clearer failure output, use the match operat
 `:ok`/`:error` tuples that mirror app code, and compare dates with `DateTime.compare/2`
 rather than direct equality.
 
-**Prefer:**
+Prefer:
 ```elixir
 assert Keyword.get(headers, :client_slug) == "cityville"
 assert Auth.role(conn, :pos) == nil
@@ -91,7 +91,7 @@ assert DateTime.compare(lower, now) in [:lt, :eq]
 assert [] == parent_domains("localhost")
 ```
 
-**Over:**
+Over:
 ```elixir
 assert "cityville" == Keyword.get(headers, :client_slug)
 assert Auth.role(conn, :pos) |> is_nil()
@@ -152,7 +152,7 @@ Assert on the arguments passed into a mocked function, at least once, inside the
 callback. Check meaningful values such as Authorization headers or passed credentials, and
 avoid helpers that hide the param assertions.
 
-**Prefer:**
+Prefer:
 ```elixir
 expect(MockHTTPClient, :get, fn url, headers, _opts ->
   assert url == "the-service-url/api/v1/addresses"
@@ -161,7 +161,7 @@ expect(MockHTTPClient, :get, fn url, headers, _opts ->
 end)
 ```
 
-**Over:**
+Over:
 ```elixir
 expect(MockHTTPClient, :get, fn _url, _headers, _opts -> {:ok, response} end)
 ```
@@ -366,14 +366,14 @@ Guard struct and field types in the test context by pattern-matching the struct 
 each test. Nested fields type-check too when the whole shape is matched in the head, as in
 `%{data: %Data{results: %Results{} = results} = data}`.
 
-**Prefer:**
+Prefer:
 ```elixir
 test "sets orchestrator metadata", %{data: %Data{} = data} do
   # ...
 end
 ```
 
-**Over:**
+Over:
 ```elixir
 test "sets orchestrator metadata", %{data: data} do
   %Data{} = data = data

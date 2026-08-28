@@ -14,7 +14,22 @@ Fail fast at the edges of that contract. Reject types and shapes that should nev
 
 #### Surface Async Failures
 
-Failures in spawned or asynchronous work must surface the same way. A task that runs off on its own still reports through logging and error monitoring; it never fails silently.
+Failures in spawned or asynchronous work must surface the same way. A task that runs off on its own still reports through logging and error monitoring; it never fails silently. Supervise the task and let error monitoring watch the spawned process instead of firing it into the void.
+
+Prefer:
+
+```elixir
+Task.Supervisor.async_nolink(MyApp.TaskSupervisor, fn ->
+  Airbrake.monitor(self())
+  deliver(webhook_url, request_id, fun)
+end)
+```
+
+Over:
+
+```elixir
+Task.async(fn -> deliver(webhook_url, request_id, fun) end)
+```
 
 #### Preserve Errors And Stacktraces
 
@@ -27,6 +42,32 @@ When you fetch a record by a key that is not guaranteed unique, such as an exter
 #### Release Cross-Cutting Resources On Every Terminal Path
 
 When a flow takes on a cross-cutting obligation that must be released, such as an unlock, a lease, or a cleanup, release it on every terminal path, ideally through one shared function. Do not thread a sentinel tuple up through extra `else` branches just to defer the release; call it where each path ends so no exit can skip it.
+
+Prefer:
+
+```elixir
+{:error, reason} ->
+  escalate_unresolved_payment(device_payment, reason)
+  release_device_and_return(device, {:cancel, inspect(reason)})
+```
+
+Over:
+
+```elixir
+{:error, reason} ->
+  escalate_unresolved_payment(device_payment, reason)
+  {:unlock_and_cancel, device, inspect(reason)}
+
+# ...forcing process/1 to grow an `else` that only routes the tuple back down:
+else
+  {:unlock_and_cancel, device, msg} ->
+    unlock_or_escalate(device)
+    {:cancel, msg}
+
+  other ->
+    other
+end
+```
 
 ## Separation of concerns and layering
 

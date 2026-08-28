@@ -16,6 +16,28 @@ property proven over all inputs beats a handful of examples, so use one to asser
 invariants such as a scalar passing through unchanged, to exercise real data boundaries,
 and when a test would otherwise build lots of similar data by hand.
 
+Prefer:
+
+```elixir
+property "scalars are returned unchanged" do
+  check all scalar <- one_of([integer(), float(), string(:utf8), atom(), boolean()]) do
+    assert Utils.detuple(scalar) == scalar
+  end
+end
+```
+
+Over:
+
+```elixir
+test "returns integers unchanged" do
+  assert Utils.detuple(7) == 7
+end
+
+test "returns strings unchanged" do
+  assert Utils.detuple("foo") == "foo"
+end
+```
+
 #### Prefer Properties For Combinatorial Logic
 
 For combinatorial, logic-heavy rules such as authorization, prefer property tests. They
@@ -62,22 +84,15 @@ rejecting the empty list. Include the empty case whenever it is a valid input.
 
 #### Give Strings A Minimum Length
 
-Give generated strings a small minimum length, around 3, so values are not easily
-overlooked or hidden when debugging.
-
-```elixir
-merchant_id <- string(:alphanumeric, min_length: 3)
-```
+Give generated strings a small minimum length, around 3 (for example
+`string(:alphanumeric, min_length: 3)`), so values are not easily overlooked or hidden
+when debugging.
 
 #### Span Every Branch With Members
 
 Generators should span every branch the code handles. Prefer `member_of/1` or `one_of/1`
 over a realistic, safe value set, including all valid enum values, rather than generating
 arbitrary atoms.
-
-```elixir
-role <- one_of([constant(:read), constant(:write)])
-```
 
 #### Reflect Realistic Domain Values Simply
 
@@ -90,10 +105,53 @@ Control the distribution of generated values with `frequency/1` rather than `one
 Exercise `nil` in nullable fields through a shared frequency-based helper that occasionally
 yields `nil`, overridable to force a non-nil value per test.
 
+Prefer:
+
+```elixir
+def change_value do
+  frequency([
+    {1, constant(nil)},
+    {9, string(:alphanumeric)}
+  ])
+end
+```
+
+Over:
+
+```elixir
+def change_value do
+  one_of([constant(nil), string(:alphanumeric)])
+end
+```
+
 #### Derive Dependent Values From One
 
 Derive dependent or equal generated values from a single earlier generated value rather
 than generating them independently.
+
+Prefer:
+
+```elixir
+gen all kind <- member_of(["email", "phone"]),
+        value <- contact_value(kind) do
+  %{kind: kind, value: value}
+end
+
+defp contact_value("email"), do: repeatedly(&Faker.Internet.email/0)
+defp contact_value("phone"), do: repeatedly(&Phone.EnUs.phone/0)
+```
+
+Over:
+
+```elixir
+gen all kind <- member_of(["email", "phone"]),
+        value <- phone_number() do
+  %{kind: kind, value: value}
+end
+```
+
+When two fields must be equal, reuse the single binding rather than generating a second
+value, for example `%{id: id, constituent_id: id}`.
 
 ## Writing and organizing generators
 
@@ -114,10 +172,11 @@ end
 
 #### Use Built In Generators Directly
 
-Use **StreamData**'s built-in generators instead of hand-rolling equivalents. Reference them
-directly, since `use ExUnitProperties` imports **StreamData** (or `import StreamData` where it
-does not). Never wrap a plain value in `constant/1` where a real generator or value is
-expected; `constant/1` yields a stream, not a value.
+Use **StreamData**'s built-in generators, such as `boolean()`, instead of hand-rolling
+equivalents like `member_of([true, false])`. Reference them directly, since
+`use ExUnitProperties` imports **StreamData** (or `import StreamData` where it does not).
+Never wrap a plain value in `constant/1` where a real generator or value is expected;
+`constant/1` yields a stream, not a value.
 
 #### Register StreamData In The Formatter
 
