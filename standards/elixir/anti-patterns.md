@@ -274,9 +274,10 @@ from releases. Drive runtime behavior through configuration values.
 Do not add comments that restate what the code already says or narrate the change you just
 made. Omit needless words in comments and documentation alike: say only what a competent
 reader needs, and do not restate what `@spec`, `@callback`, enum values, or the schema
-already document, or explain a pattern a competent developer already infers. Keep the one
-comment that captures a non-obvious, load-bearing invariant. Rationale belongs in the PR,
-commit, or ADR.
+already document, or explain a pattern a competent developer already infers. If a
+descriptively named function already conveys what it does and why, a comment may not be needed
+at all; prefer a clear name over a comment that restates it. Keep the one comment that captures
+a non-obvious, load-bearing invariant. Rationale belongs in the PR, commit, or ADR.
 
 #### Avoid Time-Relative Words In Comments
 

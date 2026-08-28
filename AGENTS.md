@@ -21,6 +21,8 @@ Agent entry point for `engineering_standards` (Euna Payments). Human readers sta
 - `index.html` - generated, self-contained dashboard. NOT committed (git-ignored); build it.
 - `scripts/` - Elixir tooling: `lib/standards.ex` (parser), `build_dashboard.exs`, `lint.exs`.
 - `Makefile` - `make lint`, `make dashboard`, `make dashboard-build`.
+- `agents/skills/*.md` - agent skills for this repo: `add-rule` (add or revise a rule) and
+  `review-pr` (review a PR against the standards, gated by top-level language/domain folder).
 
 ## House rules (must follow)
 
@@ -35,9 +37,9 @@ Agent entry point for `engineering_standards` (Euna Payments). Human readers sta
 
 ## Current state
 
-- 10 authored docs, one `#### ` heading per rule, 428 rules total: modules, naming,
+- 11 authored docs, one `#### ` heading per rule, 460 rules total: modules, naming,
   control-structures, idioms, anti-patterns, principles, application-configuration,
-  unit-testing, property-testing, tooling.
+  unit-testing, property-testing, tooling, security.
 - Each doc has a references store of per-rule metadata; the dashboard is generated from docs + stores by
   `scripts/build_dashboard.exs`. `make lint` enforces format + the 1:1 contract. CI runs both.
 - Planning docs and one-off migration helpers live in gitignored `temp/`.
