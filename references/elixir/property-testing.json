@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "doc": "standards/elixir/property-testing.md",
+  "doc": "standards/elixir/topics/property-testing.md",
   "rules": [
     {
       "name": "Assert Invariants Across Many Inputs",

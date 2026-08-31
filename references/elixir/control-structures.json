@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "doc": "standards/elixir/control-structures.md",
+  "doc": "standards/elixir/topics/control-structures.md",
   "rules": [
     {
       "name": "Sequence Fallible Steps Using With",

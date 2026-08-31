@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "doc": "standards/elixir/principles.md",
+  "doc": "standards/elixir/topics/principles.md",
   "rules": [
     {
       "name": "Let Unexpected States Crash",

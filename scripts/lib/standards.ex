@@ -5,7 +5,7 @@ defmodule Standards do
   Hand-rolled (no Markdown dependency). JSON via OTP `:json`.
   """
 
-  @collection_dir "standards/elixir"
+  @collection_dir "standards/elixir/topics"
   @store_dir "references/elixir"
 
   # ---------------------------------------------------------------- discovery

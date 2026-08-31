@@ -12,15 +12,18 @@ Agent entry point for `engineering_standards` (Euna Payments). Human readers sta
 
 ## Layout
 
-- `standards/<lang>/*.md` - the standards and the SOURCE OF TRUTH. One file per topic; each
-  rule is a `#### ` heading (its name) under a `## ` section. No frontmatter.
+- `standards/<lang>/topics/*.md` - the standards and the SOURCE OF TRUTH. One file per topic;
+  each rule is a `#### ` heading (its name) under a `## ` section. No frontmatter.
+- `standards/<lang>/README.md` - a GENERATED index: every rule name by topic and section, no
+  bodies. Read it first to find the right topic doc, then open only that file (`make index`).
 - `references/<lang>/<slug>.json` - per-doc references store: a list of per-rule metadata
   `{ name, tags: [], references: [...] }` (link-only PR provenance, no rule text). Join to the
   doc by `name`; the doc and its store must be 1:1.
 - `examples/` - native code examples next to a convention (planned; none yet).
 - `index.html` - generated, self-contained dashboard. NOT committed (git-ignored); build it.
-- `scripts/` - Elixir tooling: `lib/standards.ex` (parser), `build_dashboard.exs`, `lint.exs`.
-- `Makefile` - `make lint`, `make dashboard`, `make dashboard-build`.
+- `scripts/` - Elixir tooling: `lib/standards.ex` (parser), `build_dashboard.exs`, `lint.exs`,
+  `build_index.exs`.
+- `Makefile` - `make lint`, `make dashboard`, `make dashboard-build`, `make index`.
 - `agents/skills/*.md` - agent skills for this repo: `add-rule` (add or revise a rule) and
   `review-pr` (review a PR against the standards, gated by top-level language/domain folder).
 

@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "doc": "standards/elixir/anti-patterns.md",
+  "doc": "standards/elixir/topics/anti-patterns.md",
   "rules": [
     {
       "name": "Atoms From External Input",

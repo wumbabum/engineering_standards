@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "doc": "standards/elixir/idioms.md",
+  "doc": "standards/elixir/topics/idioms.md",
   "rules": [
     {
       "name": "Find The First Match",

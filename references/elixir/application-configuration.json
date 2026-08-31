@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "doc": "standards/elixir/application-configuration.md",
+  "doc": "standards/elixir/topics/application-configuration.md",
   "rules": [
     {
       "name": "Compile Time Files Versus Runtime",

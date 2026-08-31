@@ -5,10 +5,13 @@ description: How to add or revise a rule in the Euna Payments engineering standa
 
 # Add a rule
 
-The theme docs under `standards/elixir/*.md` are the source of truth. Each rule is one `####`
-heading. Its PR references live in a companion store `references/elixir/<doc>.json`, keyed by
-the rule's slug. The dashboard (`index.html`) is generated from both and is not committed.
+The topic docs under `standards/elixir/topics/*.md` are the source of truth. Each rule is one
+`####` heading. Its PR references live in a companion store `references/elixir/<doc>.json`, keyed
+by the rule's slug. The dashboard (`index.html`) is generated from both and is not committed.
 Do not invent rules; ground each one in real PR review comments.
+
+To find the right topic doc and section, read the generated index `standards/elixir/README.md`
+first (rule names by topic and section, no bodies), then open only that one topic doc.
 
 ## Doc format (strict)
 
@@ -50,13 +53,13 @@ Scope: <one line>                 not a rule
 
 ## Steps to add a rule
 
-1. **Add the `####` rule** under the correct `##` section in `standards/elixir/<doc>.md`,
+1. **Add the `####` rule** under the correct `##` section in `standards/elixir/topics/<doc>.md`,
    with a short unique name and a formatted body.
 2. **Add its store entry** to `references/elixir/<doc>.json` (a list of per-rule objects):
    ```json
    {
      "schema_version": 3,
-     "doc": "standards/elixir/<doc>.md",
+     "doc": "standards/elixir/topics/<doc>.md",
      "rules": [
        {
          "name": "Exact Rule Heading",
@@ -75,17 +78,20 @@ Scope: <one line>                 not a rule
    review comment. A rule may have several references; cluster near-duplicate comments under
    one rule.
 3. **Run `make lint`** (checks the format and that every rule slug has a references entry and
-   vice versa), then **`make dashboard`** to regenerate `index.html`.
-4. **Commit** the doc and the store together. `index.html` is generated and not committed.
+   vice versa), then **`make index`** to regenerate `standards/elixir/README.md`, then
+   **`make dashboard`** to regenerate `index.html`.
+4. **Commit** the doc, the store, and the regenerated `README.md` index together. `index.html`
+   is generated and not committed.
 
 ## Adding a new doc
 
-1. Create `standards/elixir/<slug>.md` with an H1, a `Scope:` line, `##` sections, and
+1. Create `standards/elixir/topics/<slug>.md` with an H1, a `Scope:` line, `##` sections, and
    `####` rules.
-2. Create `references/elixir/<slug>.json` (schema_version 3, `doc`, and a `rules` list of
-   `{ name, tags: [], references: [...] }`).
-3. Link the new doc from `standards/elixir/README.md`.
-4. `make lint` and `make dashboard`.
+2. Create `references/elixir/<slug>.json` (schema_version 3, `doc` set to
+   `standards/elixir/topics/<slug>.md`, and a `rules` list of `{ name, tags: [], references: [...] }`).
+3. `make index` picks the new doc up automatically (it is discovered by glob); the README index
+   is generated, so do not hand-edit it.
+4. `make lint`, `make index`, and `make dashboard`.
 
 ## The 1:1 contract
 
@@ -95,9 +101,10 @@ the build until the store key is updated. That is the check working as intended.
 
 ## Checklist
 
-- [ ] Rule is a `#### ` heading (short unique name) under a `## ` section.
+- [ ] Rule is a `#### ` heading (short unique name) under a `## ` section in `standards/elixir/topics/<doc>.md`.
 - [ ] Body formatted (backticks for code, bold for module names, links, sub-bullets); no em dashes; no URLs in prose.
 - [ ] Store entry `{ name, tags: [], references }` added to `references/elixir/<doc>.json`, `name` matching the heading.
 - [ ] `make lint` passes (format + 1:1).
+- [ ] `make index` regenerated `standards/elixir/README.md`.
 - [ ] `make dashboard` regenerates `index.html`.
-- [ ] Committed the doc and store; `index.html` left out.
+- [ ] Committed the doc, the store, and the regenerated README index; `index.html` left out.

@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "doc": "standards/elixir/security.md",
+  "doc": "standards/elixir/topics/security.md",
   "rules": [
     {
       "name": "Never Log Or Report Secrets Or PII",

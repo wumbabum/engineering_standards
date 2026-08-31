@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "doc": "standards/elixir/open-api-specs.md",
+  "doc": "standards/elixir/topics/open-api-specs.md",
   "rules": [
     {
       "name": "Nullable Non-Required Fields",

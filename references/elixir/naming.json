@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "doc": "standards/elixir/naming.md",
+  "doc": "standards/elixir/topics/naming.md",
   "rules": [
     {
       "name": "Snake Case For Identifiers",

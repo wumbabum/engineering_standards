@@ -43,18 +43,18 @@ machine-readable trail from every rule back to the comments behind it.
 
 | Topic | Covers |
 | --- | --- |
-| [Modules](standards/elixir/modules.md) | namespacing, aliasing, single responsibility |
-| [Naming](standards/elixir/naming.md) | names for modules, functions, variables, files |
-| [Control structures](standards/elixir/control-structures.md) | `with`, `case`/`cond`, guards, pipelines |
-| [Idioms](standards/elixir/idioms.md) | the preferred, concrete way to write common things |
-| [Anti-patterns](standards/elixir/anti-patterns.md) | concrete patterns to avoid |
-| [Principles](standards/elixir/principles.md) | the design philosophy behind the rules |
-| [Application configuration](standards/elixir/application-configuration.md) | compile-time vs runtime, secrets, fail-fast config |
-| [Unit testing](standards/elixir/unit-testing.md) | ExUnit structure, mocks and Mox, setup, factories, assertions |
-| [Property testing](standards/elixir/property-testing.md) | StreamData generators, `check all`, property invariants |
-| [Tooling](standards/elixir/tooling.md) | deps, mix.exs, formatter, Credo, Dialyzer, CI |
-| [Security](standards/elixir/security.md) | secrets and PII, authorization and IDOR, untrusted input |
-| [OpenAPI schemas](standards/elixir/open-api-specs.md) | OpenApiSpex schemas, operations, and validation |
+| [Modules](standards/elixir/topics/modules.md) | namespacing, aliasing, single responsibility |
+| [Naming](standards/elixir/topics/naming.md) | names for modules, functions, variables, files |
+| [Control structures](standards/elixir/topics/control-structures.md) | `with`, `case`/`cond`, guards, pipelines |
+| [Idioms](standards/elixir/topics/idioms.md) | the preferred, concrete way to write common things |
+| [Anti-patterns](standards/elixir/topics/anti-patterns.md) | concrete patterns to avoid |
+| [Principles](standards/elixir/topics/principles.md) | the design philosophy behind the rules |
+| [Application configuration](standards/elixir/topics/application-configuration.md) | compile-time vs runtime, secrets, fail-fast config |
+| [Unit testing](standards/elixir/topics/unit-testing.md) | ExUnit structure, mocks and Mox, setup, factories, assertions |
+| [Property testing](standards/elixir/topics/property-testing.md) | StreamData generators, `check all`, property invariants |
+| [Tooling](standards/elixir/topics/tooling.md) | deps, mix.exs, formatter, Credo, Dialyzer, CI |
+| [Security](standards/elixir/topics/security.md) | secrets and PII, authorization and IDOR, untrusted input |
+| [OpenAPI schemas](standards/elixir/topics/open-api-specs.md) | OpenApiSpex schemas, operations, and validation |
 
 > [!TIP]
 > New to the codebase? Start with **Principles** for the "why," then **Idioms** for the "how."
@@ -79,10 +79,12 @@ locally (or in CI); it never lives in the repo.
 ## Repository layout
 
 ```
-standards/        the standards (SOURCE OF TRUTH), one Markdown file per topic
-  elixir/         each rule is a `#### ` heading under a `## ` section
+standards/        the standards (SOURCE OF TRUTH)
+  elixir/
+    README.md     generated index: every rule name by topic and section
+    topics/       one Markdown file per topic; each rule is a `#### ` heading under a `## ` section
 references/        per-rule metadata (name, tags, PR references); one JSON store per doc
-scripts/           Elixir tooling: the parser, the dashboard build, and the lint
+scripts/           Elixir tooling: the parser, the dashboard build, the index, and the lint
 AGENTS.md          entry point for coding agents
 ```
 

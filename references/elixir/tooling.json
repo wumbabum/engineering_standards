@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "doc": "standards/elixir/tooling.md",
+  "doc": "standards/elixir/topics/tooling.md",
   "rules": [
     {
       "name": "Pin Dependencies At Minor Level",

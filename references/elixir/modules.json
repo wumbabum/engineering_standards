@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "doc": "standards/elixir/modules.md",
+  "doc": "standards/elixir/topics/modules.md",
   "rules": [
     {
       "name": "Alias At Parent Namespace",

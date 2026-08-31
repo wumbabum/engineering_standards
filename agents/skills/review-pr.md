@@ -38,12 +38,17 @@ standards would be ungrounded guesswork, which is worse than no review.
 If the PR spans several languages, review only the parts that map to an existing folder and state
 which parts you skipped and why.
 
-## Step 2: Load the matching rules
+## Step 2: Load only the relevant rules
 
-Read every `standards/<domain>/*.md` in the matched folder. Each `#### ` heading is one rule; its
-body, including any `Prefer:` / `Over:` example, is the standard. These docs are the ONLY basis
-for findings. You do not need `references/<domain>/`, but a rule's linked PR comments there can
-clarify intent if a finding is borderline.
+Do NOT read every doc. Start with the index `standards/<domain>/README.md`, which lists every
+rule name grouped by topic doc and section, with no bodies. From the PR diff, decide which topics
+are actually in play (an Ecto query change points at the Ecto and idioms topics, a migration at
+migrations, a controller at Phoenix/Plug and OpenAPI, and so on), and open ONLY those topic docs
+under `standards/<domain>/topics/`. Each `#### ` heading is one rule; its body, including any
+`Prefer:` / `Over:` example, is the standard, and these docs are the ONLY basis for findings. When
+a rule name in the index looks relevant, open its topic doc to read the full rule. You do not need
+`references/<domain>/`, but a rule's linked PR comments there can clarify intent on a borderline
+finding.
 
 ## Step 3: Review the diff
 

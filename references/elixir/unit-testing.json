@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "doc": "standards/elixir/unit-testing.md",
+  "doc": "standards/elixir/topics/unit-testing.md",
   "rules": [
     {
       "name": "Keep Test Data Inline",

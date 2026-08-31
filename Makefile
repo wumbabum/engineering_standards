@@ -1,8 +1,17 @@
-.PHONY: dashboard dashboard-build dashboard-serve lint
+.PHONY: dashboard dashboard-build dashboard-serve lint index index-check
 
 # Lint the standards docs: strict format and the 1:1 rule<->references contract.
 lint:
 	@elixir scripts/lint.exs
+
+# Regenerate the standards/elixir/README.md index (topic docs -> rule names by section).
+index:
+	@elixir scripts/build_index.exs
+
+# CI check: fail if the committed index is stale. Regenerate, then diff against HEAD.
+index-check: index
+	@git diff --exit-code -- standards/elixir/README.md \
+		|| ( echo "standards/elixir/README.md is stale; run 'make index' and commit it."; exit 1 )
 
 # Regenerate index.html from the docs + references stores. Fails on any format or
 # 1:1 contract violation (this is what CI runs).
