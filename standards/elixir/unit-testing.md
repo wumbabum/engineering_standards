@@ -152,18 +152,12 @@ Assert on the arguments passed into a mocked function, at least once, inside the
 callback. Check meaningful values such as Authorization headers or passed credentials, and
 avoid helpers that hide the param assertions.
 
-Prefer:
 ```elixir
 expect(MockHTTPClient, :get, fn url, headers, _opts ->
   assert url == "the-service-url/api/v1/addresses"
   assert Keyword.get(headers, :client_slug) == "cityville"
   {:ok, response}
 end)
-```
-
-Over:
-```elixir
-expect(MockHTTPClient, :get, fn _url, _headers, _opts -> {:ok, response} end)
 ```
 
 #### Mirror Real Signature And Return
@@ -198,6 +192,15 @@ implementation when a test needs real behavior.
 #### Return Keyword List From Setup
 
 Return a plain keyword list from **ExUnit** `setup`, not an `:ok` tuple or a map.
+
+```elixir
+setup do
+  [
+    token: create_token(),
+    absinthe_context: build_context()
+  ]
+end
+```
 
 #### Format Setup Returns Vertically
 
@@ -255,6 +258,11 @@ with varied inputs rather than static values.
 Test your own code, not your dependencies. Do not write tests that primarily exercise a
 third-party library's behavior or re-verify what the library already tests. Test your app's
 own integration and wiring of the dependency instead.
+
+Besides being redundant, tests that exercise a dependency are brittle: they tend to break when
+you upgrade Elixir, Erlang, or the library, and they can be flaky when they depend on behavior
+you do not control (timing, log output, concurrency). Test the seam you own instead, for example
+that a plug is wired into the router, not that the library behind it works.
 
 #### Test Behavior Once Per Layer
 

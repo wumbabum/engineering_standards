@@ -104,6 +104,18 @@ end
 Put type-asserting pattern matches (for example `%AutopayAgency{} = agency <- ...`) inside
 `with` clauses rather than on bare variables or in over-deconstructed function heads.
 
+Beyond placement, matching the expected struct in the clause (for example
+`%Changeset{valid?: true} = changeset <- ...`) helps the compiler reason about the value and
+produces clearer errors when the shape is wrong, and it keeps the failure on a `with` else
+branch instead of raising deep in the pipeline.
+
+```elixir
+with %Changeset{valid?: true} = changeset <- change_agency(agency, attrs),
+     {:ok, updated} <- Repo.update(changeset) do
+  {:ok, updated}
+end
+```
+
 ## Choosing between `case`, `cond`, `if`, and `unless`
 
 #### Prefer Single Case Over Ifs

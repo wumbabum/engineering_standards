@@ -55,6 +55,10 @@ defp build(query, [param | rest]), do: query |> apply_param(param) |> build(rest
 silently leaves duplicates behind when the left list repeats a value. Reach for a membership
 check with `Enum.reject/2` when the left side may contain duplicates.
 
+```elixir
+Enum.reject(locations, fn location -> location.zone in zones_to_remove end)
+```
+
 ## Maps and keyword lists
 
 #### Single Line For Small Literals
@@ -84,6 +88,14 @@ list, whose key order is significant.
 #### Fetch Required Options
 Fetch required options with `Keyword.fetch!/2` so they fail fast at the source, and give
 optional ones defaults with `Keyword.get/3`.
+
+```elixir
+def send(payload, opts \\ []) do
+  message = Keyword.fetch!(opts, :message)
+  type = Keyword.get(opts, :type, "default")
+  # ...
+end
+```
 
 #### Opts As Trailing Keyword List
 Accept `opts` as a trailing keyword list, not a map and not a fixed keyword pattern.
@@ -225,7 +237,6 @@ plain values or always tagged tuples, and if any path returns a tuple, every pat
 Convert third-party errors such as `HTTPoison.Error` into your own declared return types
 rather than passing them through unchanged.
 
-Prefer:
 ```elixir
 def report_payment(payment) do
   case HTTPoison.post(url, encode(payment)) do
@@ -233,11 +244,6 @@ def report_payment(payment) do
     {:error, %HTTPoison.Error{reason: reason}} -> {:error, {:http_error, reason}}
   end
 end
-```
-
-Over:
-```elixir
-def report_payment(payment), do: HTTPoison.post(url, encode(payment))
 ```
 
 #### Accessors Return Value Or Nil
@@ -298,7 +304,7 @@ or reset stale associations so callers never read outdated data.
 Use `Ecto.Query.last/2` to fetch the most recent record instead of ordering manually.
 
 #### Exists Over Fetching
-Use `Repo.exists?/2` to check existence instead of fetching records.
+Use `Repo.exists?/2` to check existence instead of fetching records when record data is not needed.
 
 #### Join To Filter Associations
 Filter to records that have an association with a join rather than post-filtering in Elixir.
@@ -306,6 +312,11 @@ Filter to records that have an association with a join rather than post-filterin
 #### Error Key On Unique Constraint
 Use Ecto's `:error_key` option on `unique_constraint` to attribute a compound uniqueness
 error to one key.
+
+```elixir
+changeset
+|> unique_constraint(:email, name: :users_client_slug_email_index, error_key: :email)
+```
 
 #### UUID Column Types
 Use UUID column types for UUID identifiers, via shared schema helpers, rather than integers.
@@ -489,6 +500,16 @@ call already set; set only what is genuinely yours, for example a `client_slug`.
 #### Airbrake Notice Fields
 When reporting to **Airbrake**, use its notice fields per the API, putting freeform data in
 `params` rather than `context`.
+
+The reason is that the notice's `context` has specific reserved fields, most of which the
+reporting client library sets for you; it is not a freeform bag. The freeform slots in the API
+(`params`, `environment`, `session`) are biased toward HTTP requests, so for background-job and
+error detail the least-bad fit is `params`. Putting error detail in `context` fights the API and
+can collide with library-managed fields.
+
+```elixir
+Airbrake.report(exception, stacktrace, params: %{job: job_name, args: args})
+```
 
 ## Comments and constants
 

@@ -16,25 +16,11 @@ property proven over all inputs beats a handful of examples, so use one to asser
 invariants such as a scalar passing through unchanged, to exercise real data boundaries,
 and when a test would otherwise build lots of similar data by hand.
 
-Prefer:
-
 ```elixir
 property "scalars are returned unchanged" do
   check all scalar <- one_of([integer(), float(), string(:utf8), atom(), boolean()]) do
     assert Utils.detuple(scalar) == scalar
   end
-end
-```
-
-Over:
-
-```elixir
-test "returns integers unchanged" do
-  assert Utils.detuple(7) == 7
-end
-
-test "returns strings unchanged" do
-  assert Utils.detuple("foo") == "foo"
 end
 ```
 
@@ -183,6 +169,14 @@ Never wrap a plain value in `constant/1` where a real generator or value is expe
 Add `:stream_data` to the imported deps in `.formatter.exs` so `gen all` and `check all`
 can omit parentheses.
 
+```elixir
+# .formatter.exs
+[
+  import_deps: [:stream_data],
+  inputs: ["{mix,.formatter}.exs", "{config,lib,test}/**/*.{ex,exs}"]
+]
+```
+
 #### Centralize Generators In One Module
 
 Keep test-data generators in a single `Generator` module and lean on them broadly. Expose
@@ -193,6 +187,12 @@ a lightweight factory, and move repeated specific construction into a shared gen
 
 Generators should produce params only. Insert records inside the test's rolled-back sandbox
 transaction, not inside the generator.
+
+An insert done inside a generator runs outside the test's rolled-back transaction, so those
+records accumulate across every property-test iteration. That leads to spurious uniqueness
+violations, false test failures, and hard-to-debug state that depends on iteration order. Keep
+the generator pure (params only) and insert inside the transaction so the sandbox rolls the
+records back between iterations.
 
 #### Inline Generators And Remove Unused Bindings
 
