@@ -965,39 +965,6 @@
       ]
     },
     {
-      "name": "Start Oban In Base Application",
-      "tags": [],
-      "references": [
-        {
-          "comment_url": "https://github.com/CityBaseInc/device_payment_service/pull/10#discussion_r1575206238",
-          "repo": "device_payment_service",
-          "pr_number": 10,
-          "author": "jdfrens",
-          "path": "apps/core/lib/core/application.ex",
-          "line": 10,
-          "created_at": "2024-04-22T18:34:40Z"
-        },
-        {
-          "comment_url": "https://github.com/CityBaseInc/device_payment_service/pull/150#discussion_r2728678283",
-          "repo": "device_payment_service",
-          "pr_number": 150,
-          "author": "jdfrens",
-          "path": "apps/core/lib/core/application.ex",
-          "line": 11,
-          "created_at": "2026-01-26T18:04:12Z"
-        },
-        {
-          "comment_url": "https://github.com/CityBaseInc/invoice_service/pull/451#discussion_r3228083963",
-          "repo": "invoice_service",
-          "pr_number": 451,
-          "author": "jdfrens",
-          "path": "apps/core/lib/core/application.ex",
-          "line": 7,
-          "created_at": "2026-05-12T16:21:57Z"
-        }
-      ]
-    },
-    {
       "name": "Library Dependency And Lock Rules",
       "tags": [],
       "references": [

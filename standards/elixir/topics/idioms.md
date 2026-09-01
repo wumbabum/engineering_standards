@@ -325,37 +325,6 @@ In [**Absinthe**](https://hexdocs.pm/absinthe/Absinthe.html) schemas, mark field
 `non_null(list_of(non_null(...)))` for lists whose elements are always present, and pair
 `non_null` args with `default_value` so an explicit `null` is rejected.
 
-## Oban jobs
-
-#### Args Schema For Workers
-Define an `args_schema` for [**Oban Pro**](https://oban.pro/docs/pro/overview.html) workers. It casts args to a struct with atom keys, so
-match the struct rather than string keys.
-
-#### Avoid Extra Queues
-Avoid creating extra queues unnecessarily, since each queue consumes PostgreSQL connections.
-
-#### Return Values Control Retries
-Use return values to control retries: return an error tuple to retry a temporary failure,
-and `{:cancel, reason}` to stop without retrying.
-
-#### Enqueue Follow-Ups On Success
-Do not enqueue a follow-up job on `:error`; enqueue it only on success, or it re-runs on
-every retry attempt.
-
-#### Keep After Process Light
-Keep `after_process` light. It receives hook states (`:snooze`, `:cancel`, `:complete`,
-`:discard`, `:error`), and any substantial business logic or new network call belongs in a
-dedicated retryable job instead.
-
-#### Idempotent Retryable Writes
-Make retryable writes idempotent by re-fetching and skipping when the target field is
-already set.
-
-#### Do Not Serialize Large Data Into Job Return Values
-A worker's return value is persisted onto the Oban job row, so return `{:ok, data}` only for small,
-interesting data. Do not serialize a large record set into the return value; log the per-record
-outcome instead and return `:ok`. On sad paths, log an error and return `:ok` as well.
-
 ## Logging metadata
 
 #### Individual Metadata Keys

@@ -149,10 +149,6 @@ Configure a component under the OTP application that actually owns it, and decla
 
 In an umbrella, configure umbrella-wide tooling and settings at the root. Keep only component-specific settings in a component app's config, and leave **Dialyzer**, docs, aliases, and other umbrella-wide concerns at the top.
 
-#### Start Oban In Base Application
-
-Start **Oban** and other shared infrastructure, such as a logger backend, in a dedicated base or component application that the others depend on, not in `core`. This keeps database migrations from starting Oban prematurely and picking up jobs before they should.
-
 #### Library Dependency And Lock Rules
 
 For a library, `mix.lock` is irrelevant to consumers; the `mix.exs` constraints govern the versions a consumer resolves. Mark dependencies a consumer may not need as `optional`.

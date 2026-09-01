@@ -350,12 +350,6 @@ hardcoding them.
 
 ## Framework specifics
 
-#### Test Oban Workers Natively
-
-Test **[Oban](https://oban.hexdocs.pm/Oban.html)** workers with the framework's own tools. Use `Oban.Pro.Testing` with
-`testing: :manual` for **Oban Pro** workers, and assert job insertion with **Oban**'s
-`assert_enqueued` rather than wrapping insertion in a behaviour to mock.
-
 #### Use Verified Routes Everywhere
 
 Use verified routes (`~p`) consistently, including in tests, such as `~p"/check/#{id}"`,
