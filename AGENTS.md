@@ -1,58 +1,39 @@
 # AGENTS.md
 
-Agent entry point for `engineering_standards` (Euna Payments). Human readers start at
-[README.md](README.md); this file is the terse operational map for agents.
-
-## What this repo is
-
-- The plain-language **source of truth** for how we write code. Per-repo tooling (formatters,
-  linters, CI) is configured to match these docs, not the reverse.
-- Every rule is derived from **real PR review comments** by our senior reviewers. Do not
-  invent rules; ground them in that evidence.
+This repo is the plain-language source of truth for how we write code at Euna Payments
+(CityBase). It holds coding standards organized by language or domain, each rule distilled from
+real pull request review comments by our reviewers. Consult it whenever you are reading or writing
+code it covers, so your work matches the conventions it will be reviewed against.
 
 ## Layout
 
-- `standards/<lang>/topics/*.md` - the standards and the SOURCE OF TRUTH. One file per topic;
-  each rule is a `#### ` heading (its name) under a `## ` section. No frontmatter.
-- `standards/<lang>/README.md` - a GENERATED index: every rule name by topic and section, no
-  bodies. Read it first to find the right topic doc, then open only that file (`make index`).
-- `references/<lang>/<slug>.json` - per-doc references store: a list of per-rule metadata
-  `{ name, tags: [], references: [...] }` (link-only PR provenance, no rule text). Join to the
-  doc by `name`; the doc and its store must be 1:1.
-- `examples/` - native code examples next to a convention (planned; none yet).
-- `index.html` - generated, self-contained dashboard. NOT committed (git-ignored); build it.
-- `scripts/` - Elixir tooling: `lib/standards.ex` (parser), `build_dashboard.exs`, `lint.exs`,
-  `build_index.exs`.
-- `Makefile` - `make lint`, `make dashboard`, `make dashboard-build`, `make index`.
-- `agents/skills/*.md` - agent skills for this repo: `add-rule` (add or revise a rule) and
-  `review-pr` (review a PR against the standards, gated by top-level language/domain folder).
+Standards are grouped into collections under `standards/`, each with the same shape:
 
-## House rules (must follow)
+```
+standards/<domain>/
+  README.md     generated index: every rule name by topic and section, no bodies
+  topics/*.md   the standards themselves, one file per topic
+```
 
-- **No em dashes** in any prose.
-- Standards are human-language and imperative; state settled team standard, not suggestions.
-- Rules live in the `.md` docs; references live in the store. Never put PR URLs in the docs,
-  and never hand-write rule text into a store.
-- To add or change a rule, follow the `agents/skills/add-rule.md` skill: `#### ` rule under a
-  `## ` section, references under its slug in the store, then `make lint` and `make dashboard`.
-- The doc rule slugs and the store slugs must stay 1:1; `make lint`/`make dashboard` fail otherwise.
-- Commit one topic/theme per commit. Default branch is `master`; work on a branch.
+The available collections are the subfolders of `standards/` (currently just `elixir`).
 
-## Current state
+## How to use it
 
-- 14 authored docs, one `#### ` heading per rule, 454 rules total: modules, naming,
-  control-structures, idioms, database, oban, anti-patterns, principles, application-configuration,
-  unit-testing, property-testing, tooling, security, open-api-specs.
-- Each doc has a references store of per-rule metadata; the dashboard is generated from docs + stores by
-  `scripts/build_dashboard.exs`. `make lint` enforces format + the 1:1 contract. CI runs both.
-- Planning docs and one-off migration helpers live in gitignored `temp/`.
+For the domain you are working in:
 
-## Future plans
+1. Open that collection's index, `standards/<domain>/README.md`. It is the source of truth for
+   which topics and rules exist: every rule name grouped by topic and section, no rule text, so it
+   is cheap to read. Do not rely on a list kept anywhere else, which can drift out of date.
+2. This collection is built for progressive disclosure: from the index, identify the topics your
+   task touches and open ONLY those topic docs under `standards/<domain>/topics/`, rather than
+   reading everything.
 
-- **Tags:** render each rule's `##` section as a filterable tag; then allow arbitrary per-rule
-  tags. See `temp/planning/sidecar-removal.md`.
-- **Re-home MISC:** ~227 fragments ejected during synthesis are tracked in
-  `temp/data/synthesis/misc_tracker.json`; review for keepers.
-- **Hosting:** private, org-only GitHub Pages for the dashboard (deferred, pending devops).
-- **`skills/`:** more skills that operate on the standards themselves.
-- **Umbrella apps:** a planned standard, not yet authored.
+A collection may include a `principles` topic (the reasoning behind the concrete rules) and an
+`anti-patterns` topic (what to avoid); consult them when a rule is unclear or a change feels risky.
+
+## Working on the standards themselves
+
+- To add or change a rule, follow the `agents/skills/add-rule.md` skill: the strict doc format, the
+  references store, the 1:1 doc-to-store contract, and the `make lint` / `make index` /
+  `make dashboard` workflow.
+- To review a pull request against these standards, use the `agents/skills/review-pr.md` skill.
