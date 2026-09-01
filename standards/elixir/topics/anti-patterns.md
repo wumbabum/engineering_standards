@@ -220,24 +220,6 @@ Do not model shared behavior with inheritance-style base modules or Ruby-style m
 inclusion. When only a function is needed, use a plain module or pass functions as values,
 and reach for a protocol when you need polymorphism.
 
-## Data, queries, and Ecto
-
-#### Unpopulated Virtual Fields
-
-Prefer real, preloaded associations over virtual fields that Elixir code must populate; an
-unpopulated virtual field is silently `nil`.
-
-#### N Plus One Queries
-
-Avoid N+1 and redundant queries. Do not fetch related data one row at a time in a loop,
-and treat fetching the same record with the same params more than once in a single request
-as a smell to eliminate.
-
-#### Matching Changeset Internal Values
-
-Do not pattern-match on a changeset's internal values; read the values from the source
-params instead.
-
 ## Data types and matching
 
 #### Matching On Keyword Lists

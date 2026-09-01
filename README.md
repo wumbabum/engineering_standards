@@ -47,6 +47,7 @@ machine-readable trail from every rule back to the comments behind it.
 | [Naming](standards/elixir/topics/naming.md) | names for modules, functions, variables, files |
 | [Control structures](standards/elixir/topics/control-structures.md) | `with`, `case`/`cond`, guards, pipelines |
 | [Idioms](standards/elixir/topics/idioms.md) | the preferred, concrete way to write common things |
+| [Database](standards/elixir/topics/database.md) | Ecto changesets, queries, migrations, bulk and streaming |
 | [Anti-patterns](standards/elixir/topics/anti-patterns.md) | concrete patterns to avoid |
 | [Principles](standards/elixir/topics/principles.md) | the design philosophy behind the rules |
 | [Application configuration](standards/elixir/topics/application-configuration.md) | compile-time vs runtime, secrets, fail-fast config |
