@@ -80,7 +80,7 @@ apply it as written; these are pointers, not replacements.
 - **Return Tagged Reasons Not Parsed Strings** and **Descriptive Error Reason Atoms**
   (`idioms.md`): flag logic that branches on a human-readable message; decisions should switch on
   tagged tuples or atoms, not string prefixes.
-- **N Plus One Queries** (`anti-patterns.md`): flag a query issued inside a loop or enumeration;
+- **N Plus One Queries** (`database.md`): flag a query issued inside a loop or enumeration;
   preload or batch instead.
 - Security and correctness findings (anything in `security.md`, and the rules above) outrank
   stylistic ones; raise their severity accordingly.
