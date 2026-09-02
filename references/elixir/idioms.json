@@ -74,6 +74,21 @@
       ]
     },
     {
+      "name": "Map When Results Aid Debugging",
+      "tags": [],
+      "references": [
+        {
+          "comment_url": "https://github.com/CityBaseInc/audit_service/pull/13#discussion_r2098456308",
+          "repo": "audit_service",
+          "pr_number": 13,
+          "author": "jdfrens",
+          "path": "apps/api/lib/api.ex",
+          "line": 28,
+          "created_at": "2025-05-20T16:53:54Z"
+        }
+      ]
+    },
+    {
       "name": "Join Delimited Output",
       "tags": [],
       "references": [

@@ -72,7 +72,7 @@
       ]
     },
     {
-      "name": "Reserve With For Result Tuples",
+      "name": "Use With For Result Tuples",
       "tags": [],
       "references": [
         {
@@ -129,7 +129,7 @@
       ]
     },
     {
-      "name": "Keep With Else Minimal",
+      "name": "Avoid Else On With",
       "tags": [],
       "references": [
         {
@@ -176,6 +176,69 @@
           "path": "apps/event_bus/lib/event_bus/subscribers/submit_payment.ex",
           "line": 123,
           "created_at": "2025-07-31T20:29:20Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/audit_service/pull/43#discussion_r2399082104",
+          "repo": "audit_service",
+          "pr_number": 43,
+          "author": "jdfrens",
+          "path": "apps/dispatch/lib/dispatch/workers/create_entry_worker.ex",
+          "line": 115,
+          "created_at": "2025-10-02T14:44:33Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/imp_backend/pull/1969#discussion_r3094150750",
+          "repo": "imp_backend",
+          "pr_number": 1969,
+          "author": "jdfrens",
+          "path": "lib/imp_backend_web/controllers/api/v1/rescue_document_controller.ex",
+          "line": 33,
+          "created_at": "2026-04-16T14:55:36Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/payment_api/pull/1216#discussion_r2849706942",
+          "repo": "payment_api",
+          "pr_number": 1216,
+          "author": "jdfrens",
+          "path": "apps/dispatch/lib/dispatch/workers/backfill_card_type_for_instrument_worker.ex",
+          "line": 40,
+          "created_at": "2026-02-24T21:45:34Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/518#discussion_r1297618338",
+          "repo": "user_management_service",
+          "pr_number": 518,
+          "author": "spearce-citybase",
+          "path": "apps/service_tasks/lib/service_tasks/okta.ex",
+          "line": 79,
+          "created_at": "2023-08-17T18:54:05Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/575#discussion_r1795690620",
+          "repo": "user_management_service",
+          "pr_number": 575,
+          "author": "jdfrens",
+          "path": "apps/web/lib/web/controllers/password_reset_key_controller.ex",
+          "line": 39,
+          "created_at": "2024-10-10T15:36:31Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/603#discussion_r2379625703",
+          "repo": "user_management_service",
+          "pr_number": 603,
+          "author": "jdfrens",
+          "path": "apps/web/lib/web/controllers/sso/person_controller.ex",
+          "line": 61,
+          "created_at": "2025-09-25T15:54:02Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/user_management_service/pull/628#discussion_r3087200573",
+          "repo": "user_management_service",
+          "pr_number": 628,
+          "author": "wumbabum",
+          "path": "apps/event_bus/lib/event_bus/subscribers/update_profile_verification_key.ex",
+          "line": 87,
+          "created_at": "2026-04-15T14:26:49Z"
         }
       ]
     },

@@ -8,6 +8,8 @@ Scope: How we configure Elixir apps across compile-time and runtime, config file
 
 Keep static values in the compile-time config files (`config.exs` and the per-environment files) and reserve `runtime.exs` for values derived from the system environment and their defaults. Move prod config that depends on env vars into `runtime.exs`, and keep everything else out of it.
 
+`runtime.exs` is evaluated once when the app boots and not again until it restarts, so config is static while the app runs. Anything that needs a function call at startup must be done in `runtime.exs`; that is why the Logger `:metadata` is set there.
+
 #### Reading Compile Time Config Safely
 
 Read compile-time config with `Application.compile_env/2` or `/3`, assigning it to a module attribute or reading it in the module body, so the compiler does not warn about a runtime lookup of a value fixed at compile time.
@@ -50,6 +52,9 @@ case config_env() do
   :dev ->
     # optional locally: a dev need not set it
     config :invoice_service, :api_key, System.get_env("API_KEY", "dev-api-key")
+
+  :test ->
+    nil
 
   :prod ->
     # required in every deployment: crash at startup if unset
@@ -97,7 +102,13 @@ Read secrets and tokens from environment variables in runtime config, per enviro
 
 #### Namespace Config Under App Name
 
-Namespace application config under the app or consuming-module name, mapping it to a keyword list. Group related keys under one namespacing key, and prefer generic, extensible names over ambiguous ones or names coupled to a single consumer.
+Config in `config/*.exs` files should specify the name of the component app (for example `:core`, `:web`) and the module using the configuration (for example `Core.Schedule`, `Web.Endpoint`). The value should be a keyword list.
+
+```elixir
+config :core, Core.Schedule, foo: 5, bar: "a"
+
+config :web, Web.ScheduleController, timeout: 40_000
+```
 
 #### Consistent Structure Read With Get In
 
@@ -165,7 +176,7 @@ Inject configuration through an `opts` parameter that falls back to `Application
 
 ```elixir
 def start_link(opts) do
-  timeout = Keyword.get(opts, :timeout, Application.get_env(:invoice_service, :timeout))
+  timeout = Keyword.get_lazy(opts, :timeout, fn -> Application.get_env(:invoice_service, :timeout) end)
   ...
 end
 ```

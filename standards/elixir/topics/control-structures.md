@@ -16,10 +16,10 @@ private function per step so the happy path reads straight down the `with` and e
 translates its own errors. This collapses the duplicated `{:error, _}` passing that nested
 `case` expressions force on you.
 
-#### Reserve With For Result Tuples
+#### Use `with` For Result Tuples
 
-Reserve `with/1` for chains of `:ok`/`:error` tuples, where you are operating under
-uncertainty. Reserve pipelines for transforming a state struct through steps that do not
+Use `with/1` for chains of `:ok`/`:error` tuples, where you are operating under
+uncertainty. Use pipelines for transforming a state struct through steps that do not
 fail. Forcing a pipeline to thread uncertainty is tricky and grows complicated over time.
 
 #### Skip With Without Pattern Matching
@@ -48,13 +48,14 @@ with token <- get_token(conn) do
 end
 ```
 
-#### Keep With Else Minimal
+#### Avoid Else On With
 
-Keep the `else` minimal. Drop a no-op `else` that only returns what it received: a `with`
-without `else` already returns a non-matching value unchanged, so the clause is redundant,
-and a pass-through `else` can convert a returned error into a `WithClauseError` crash.
-When error handling is real, extract it into local functions that return their own
-`:error` tuples rather than growing a complex `else`.
+Do not attach an `else` to a `with`. The Elixir docs call complex `else` clauses an
+anti-pattern: they mix unrelated failure handling into one place. A `with` without `else`
+already returns a non-matching value unchanged, and a pass-through `else` can convert a
+returned error into a `WithClauseError` crash. Have each clause return an already-shaped
+tagged tuple and route failures through a fallback instead. The same applies to a
+single-clause `with` that exists only to attach an `else`.
 
 Prefer:
 ```elixir
@@ -77,7 +78,7 @@ end
 #### Keep With Bodies Flat
 
 Keep `with` bodies flat. Do not nest a `case` inside a `with` body, and do not call
-**Logger** in `<-` clauses. Push that work into named helper functions; a **Logger** call in a
+**Logger** in `<-` clauses. Push that work into named local functions; a **Logger** call in a
 match clause is a smell.
 
 Prefer:

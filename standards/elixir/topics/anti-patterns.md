@@ -22,41 +22,13 @@ allowlist, or keep the data as strings.
 
 ## Control flow
 
-#### Else Clauses On With
-
-Do not put an `else` clause on a `with` expression. The Elixir docs call complex `else`
-clauses an anti-pattern, and they mix unrelated failure handling into one place. Have each
-step call a private function that returns already-shaped tagged tuples and route failures
-through a fallback, so the `with` needs no `else`. The same applies to a single-clause
-`with` that exists only to attach an `else`.
-
-Prefer:
-
-```elixir
-with {:ok, profile} <- fetch_profile(id),
-     :ok <- ensure_no_contact(profile) do
-  create_contact(profile)
-end
-```
-
-Over:
-
-```elixir
-with %Profile{} = profile <- Repo.get(Profile, id),
-     [] <- Contacts.list_by(profile) do
-  create_contact(profile)
-else
-  nil -> {:error, :not_found}
-  [_ | _] -> {:error, :already_exists}
-end
-```
-
-#### Try Rescue And Throw Catch
+#### Avoid `try`/`rescue` and `throw`/`catch`
 
 Avoid `try`/`rescue` and `throw`/`catch`. They are extremely rare in idiomatic Elixir.
 Let it crash instead, and let expected raises such as `String.to_existing_atom/1`
 propagate. For optional callbacks, define the function everywhere or check with
-`Module.defines?/2` rather than rescuing.
+`Module.defines?/2` rather than rescuing. When a failure is expected rather than
+exceptional, do not raise: return a tagged error tuple like `{:error, reason}` the caller can handle.
 
 #### Special Casing Error Handling
 
@@ -72,15 +44,14 @@ access chains that must succeed, catch-all error clauses for cases you have not 
 checks a plug already performs. Let it crash. Surface the violation while writing tests,
 fix it, and trust the invariant thereafter.
 
-Prefer `Enum.map` over `Enum.each` where the mapped results aid debugging.
-
 ## Error handling and results
 
 #### Bare String Error Reasons
 
 Do not return bare string reasons in `:error` tuples. Callers cannot pattern match on a
 string, and the failure detail is lost. Return structured, matchable data such as
-`{:error, :failed_s3_upload, response: response}`.
+`{:error, :failed_s3_upload, response: response}`. A human-readable string is acceptable
+only at the very last step, when rendering the failure into a response for the client.
 
 #### Result Tuples As Arguments
 
@@ -94,16 +65,12 @@ caller should handle. Return an error the caller can act on.
 
 ## Logging
 
-#### Logger Inside Logger Backend
-
-Never call `Logger` from inside a logger backend; it can trigger an infinite logging loop.
-Write to stderr with `IO.warn/1` instead.
-
 #### Wrapping Logger In Helper
 
 Do not wrap `Logger` in a helper module. The wrapper becomes the reported source file and
 line, and `Logger` already captures the real call site. Call `Logger` directly and
-configure **Airbrake.LoggerBackend** for error reporting.
+configure **Airbrake.LoggerBackend** for error reporting. For the same reason, do not
+extract side-effectful "logging functions"; inline the log call where it happens.
 
 #### Logging Full External Responses
 
@@ -121,16 +88,12 @@ unreadable even pretty-printed. Extract the meaningful fields first, for example
 
 Do not log an error again when the function you called already logged it.
 
-#### Extracting Logging Functions
-
-Do not extract side-effectful "logging functions"; they read poorly. Inline the log call
-where it happens.
-
 #### Logger Metadata As Data
 
 Do not use `Logger.metadata/0` to pass functional data between functions. Metadata is for
 incidental context like a request id; pass values your logic depends on explicitly as
-arguments.
+arguments. Incidental request context such as `request_id` and `client_slug` is fine as
+metadata; the ban is only on functional data your logic depends on.
 
 #### Do Not Log Expected Outcomes At Warning Or Error
 
@@ -170,10 +133,12 @@ keeps everything in one place.
 Do not reference test-only modules like `DataCase` from production code; they are not
 compiled into a release. Copy the needed helper into a production module.
 
-#### Modules Importing Each Other
+#### Prefer Alias Over Import
 
-Do not have modules import each other. The mutual dependency can deadlock compilation.
-Break the cycle, for example with `alias`.
+Prefer `alias` over `import`. `import` brings another module's names into scope ambiguously
+and couples the two modules, while `alias` keeps each call site explicit about where a
+function comes from. In the extreme, modules that import each other can even deadlock
+compilation, so break such a cycle with `alias`.
 
 ## Macros and metaprogramming
 
@@ -183,6 +148,10 @@ Do not reach for macros or metaprogramming to vary behavior. A macro is copy-pas
 bloats every caller, and an overridable hook is premature until something actually
 overrides it. Use plain functions, first-class functions, or optional keyword arguments
 unless you genuinely need `unquote`, the `opts` parameter, or context like `__MODULE__`.
+The [official Elixir macro guide](https://hexdocs.pm/elixir/macros.html) puts it plainly:
+"Macros should only be used as a last resort." More broadly, do not implement OOP in Elixir:
+macros and inheritance-style base modules that emulate objects fight the language. See
+`Inheritance Style Base Modules`.
 
 Prefer:
 

@@ -90,7 +90,20 @@ end
 
 Avoid N+1 and redundant queries. Do not fetch related data one row at a time in a loop,
 and treat fetching the same record with the same params more than once in a single request
-as a smell to eliminate.
+as a smell to eliminate. Prefer [`Ecto.Query.preload/3`](https://hexdocs.pm/ecto/Ecto.Query.html)
+over [`Ecto.Repo.preload/3`](https://hexdocs.pm/ecto/Ecto.Repo.html): loading the association
+in the query fetches it as part of that query, while a separate `Repo.preload` issues another
+query after the fact.
+
+```elixir
+# one round trip
+from(o in Order, where: o.client_id == ^client_id, preload: [:line_items])
+|> Repo.all()
+
+# a second query after the fact
+orders = Repo.all(from o in Order, where: o.client_id == ^client_id)
+Repo.preload(orders, :line_items)
+```
 
 ## Streaming and bulk operations
 

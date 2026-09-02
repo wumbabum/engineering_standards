@@ -28,6 +28,10 @@ with a mapping function instead of mapping and then building the set.
 Use `Enum.each/2` rather than `Enum.map/2` when you do not need the results, so you do not
 accumulate a throwaway list.
 
+#### Map When Results Aid Debugging
+Prefer `Enum.map/2` over `Enum.each/2` when keeping the mapped results on hand makes the
+code easier to debug, even though you would otherwise discard them.
+
 #### Join Delimited Output
 Use `Enum.join/2` to assemble delimited output instead of special-casing an empty accumulator.
 

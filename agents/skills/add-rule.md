@@ -29,7 +29,8 @@ Scope: <one line>                 not a rule
 
 - `##` is a section (a sub-group). Every rule lives under one.
 - `####` is a rule. The heading is a SHORT, UNIQUE (within the doc) name, 3 to 6 words,
-  Title-case, no trailing punctuation and no code/backticks/links in the heading itself.
+  Title-case, no trailing punctuation and no links in the heading itself. Backticks for code
+  in a heading are allowed (for example `` #### Avoid `try`/`rescue` and `throw`/`catch` ``).
 - `###` is reserved (do not use it for rules).
 - The **slug** (join key) is the name lowercased with non-alphanumerics collapsed to `-`.
 - The body is the prose beneath the heading, formatted per the conventions below. It may
