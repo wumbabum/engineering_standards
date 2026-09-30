@@ -1,0 +1,19 @@
+# OS and editor junk
+.DS_Store
+Thumbs.db
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Logs and scratch files
+*.log
+*.tmp
+
+# Local working area: synthesis pipeline, planning docs, corpus, and generated data
+temp/
+
+# Build artifact: the dashboard is generated from references/ via `make dashboard-build`.
+# Build it locally (or in CI); it is not committed.
+index.html

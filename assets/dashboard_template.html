@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Euna Payments Elixir Standards</title>
+<style>
+  :root {
+    --bg: #ffffff; --fg: #1a1a1a; --muted: #6b7280; --card: #f7f7f8;
+    --border: #e5e7eb; --link: #1d4ed8; --accent: #0f766e; --chip: #eef2ff; --chip-fg: #3730a3;
+    --box: #c4ccd6; --head-border: #bfbedb; --chip-active-bg: #d0edff; --chip-active-border: #c7d0d5;
+    --caret-down: __CARET_DOWN__;
+    --caret-up: __CARET_UP__;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0f1115; --fg: #e6e6e6; --muted: #9aa4b2; --card: #171a21;
+      --border: #262b36; --link: #7aa2ff; --accent: #4fd1c5; --chip: #1e2333; --chip-fg: #a5b4fc;
+      --box: #3a4250; --head-border: #52516f; --chip-active-bg: var(--accent); --chip-active-border: var(--accent);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0f1115; --fg: #e6e6e6; --muted: #9aa4b2; --card: #171a21;
+    --border: #262b36; --link: #7aa2ff; --accent: #4fd1c5; --chip: #1e2333; --chip-fg: #a5b4fc;
+    --box: #3a4250; --head-border: #52516f; --chip-active-bg: var(--accent); --chip-active-border: var(--accent);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); min-width: 320px;
+    font: 15px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  header { position: sticky; top: 0; background: var(--bg); border-bottom: 1px solid var(--border); z-index: 5; }
+  .header-inner { max-width: 1250px; margin: 0 auto; padding: 14px clamp(14px, 3vw, 24px); }
+  .titlebar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+  h1 { font-size: 18px; margin: 0; }
+  .meta { color: var(--muted); font-size: 12px; margin-left: 8px; font-weight: normal; }
+  .toggle { cursor: pointer; font-family: inherit; font-size: 12px; color: var(--fg); background: var(--card);
+    border: 1px solid var(--border); border-radius: 8px; padding: 6px 10px; white-space: nowrap; flex: none; }
+  .toggle:hover { border-color: var(--accent); }
+  .controls { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  #q { flex: 1; min-width: 220px; padding: 8px 12px; border: 1px solid var(--border);
+    border-radius: 8px; background: var(--card); color: var(--fg); font-size: 14px; }
+  #filters { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+  #tag-filters { flex-basis: 100%; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+  #tag-filters:empty { display: none; }
+  #tag-filters::before { content: "tags:"; color: var(--muted); font-size: 12px; align-self: center; }
+  .chip { cursor: pointer; font-family: inherit; font-size: 12px; color: var(--chip-fg);
+    background: var(--chip); border: 1px solid var(--border); padding: 3px 10px; border-radius: 999px; }
+  .chip.active { background: var(--chip-active-bg); color: #06231f; border-color: var(--chip-active-border); font-weight: 600; }
+  #clear { cursor: pointer; font-size: 12px; color: var(--muted); background: none; border: none;
+    text-decoration: underline; font-family: inherit; }
+  #clear[hidden] { display: none; }
+  main { max-width: 1250px; margin: 0 auto; padding: clamp(14px, 3vw, 24px); }
+  .doc { margin: 0 0 18px; border: 1px solid var(--box); border-radius: 12px; overflow: hidden; }
+  .doc-head { font-size: 16px; font-weight: 600; cursor: pointer; user-select: none;
+    border-bottom: 2px solid var(--head-border); padding: 9px 14px; display: flex; align-items: center; gap: 8px; }
+  .doc-caret::before { content: ""; display: inline-block; width: 16px; height: 16px;
+    background-color: var(--muted);
+    -webkit-mask: var(--caret-down) center / contain no-repeat;
+            mask: var(--caret-down) center / contain no-repeat; }
+  .doc.open .doc-caret::before { -webkit-mask-image: var(--caret-up); mask-image: var(--caret-up); }
+  .count { color: var(--muted); font-size: 12px; font-weight: normal; }
+  .doc-body { position: relative; padding: 0 14px 8px; }
+  .doc.peek .doc-body { max-height: 200px; overflow: hidden; }
+  .peek-fade { position: absolute; left: 0; right: 0; bottom: 0; height: 40px; cursor: pointer;
+    display: flex; align-items: flex-end; justify-content: center; padding-bottom: 2px;
+    background: linear-gradient(to bottom, transparent, var(--bg) 50%); }
+  .peek-fade::before { content: ""; display: inline-block; width: 26px; height: 26px;
+    background-color: var(--muted);
+    -webkit-mask: var(--caret-down) center / contain no-repeat;
+            mask: var(--caret-down) center / contain no-repeat; }
+  .doc.open .peek-fade, .doc.nopeek .peek-fade { display: none; }
+  .doc.nopeek .doc-body { max-height: none; }
+  .rule { background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+    padding: 12px 14px; margin: 10px 0; }
+  .rule-category h2 { font-size: 14px; font-weight: 600; color: var(--muted); text-transform: uppercase;
+    letter-spacing: .04em; margin: 14px 0 2px; }
+  .rule-category:first-child h2 { margin-top: 4px; }
+  .rule .rule-name { font-weight: 600; margin-bottom: 4px; }
+  .rule .text { margin: 2px 0 8px; overflow-wrap: anywhere; }
+  .rule .text p { margin: 4px 0; }
+  .rule .text ul { margin: 4px 0; padding-left: 18px; }
+  .rule .text pre { background: var(--bg); border: 1px solid var(--border); border-radius: 6px;
+    padding: 8px 10px; overflow-x: auto; margin: 6px 0; }
+  .rule .text pre code { background: none; color: inherit; padding: 0; }
+  .rule code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.9em;
+    background: var(--chip); color: var(--chip-fg); padding: 0 4px; border-radius: 4px; }
+  .rule .text a { color: var(--link); text-decoration: underline; }
+  details.refs > summary { list-style: none; cursor: pointer; user-select: none; margin-top: 8px;
+    display: flex; justify-content: flex-end; align-items: center; gap: 8px; flex-wrap: wrap; }
+  details.refs > summary::-webkit-details-marker { display: none; }
+  .rule .tags { display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end; }
+  .rule .tag { font-size: 11px; color: var(--chip-fg); background: var(--chip); border: 1px solid var(--chip);
+    border-radius: 999px; padding: 1px 8px; cursor: pointer; font-family: inherit; }
+  .rule .tag:hover { border-color: var(--accent); }
+  .rule .tag.active { background: var(--chip-active-bg); color: #06231f; border-color: var(--chip-active-border); font-weight: 600; }
+  .rule .sep { color: var(--muted); }
+  .rule .reflabel { color: var(--link); font-size: 12.5px; display: inline-flex; align-items: center; gap: 5px; }
+  .rule .reflabel::before { content: "\25B8"; font-size: 10px; }
+  details.refs[open] .reflabel::before { content: "\25BE"; }
+  details.refs ul { list-style: none; margin: 6px 0 0; padding: 0 0 0 15px;
+    display: flex; flex-direction: column; gap: 3px; }
+  details.refs li { font-size: 12.5px; color: var(--muted); overflow-wrap: anywhere; }
+  details.refs a { color: var(--link); text-decoration: none; }
+  details.refs a:hover { text-decoration: underline; }
+  .refs .who { color: var(--muted); }
+  .empty { color: var(--muted); padding: 40px 0; text-align: center; }
+  @media (max-width: 640px) {
+    .header-inner { padding: 12px 14px; }
+    h1 { font-size: 16px; }
+    #q { flex: 1 1 100%; min-width: 0; }
+    #filters { width: 100%; }
+    .rule { padding: 10px 12px; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div class="titlebar">
+      <h1>Euna Payments Elixir Standards <span class="meta" id="genmeta"></span></h1>
+      <button id="toggle" class="toggle" type="button"></button>
+    </div>
+    <div class="controls">
+      <input id="q" type="search" placeholder="Filter rules, sections, repos, authors...">
+      <nav id="filters"></nav>
+      <button id="clear" hidden>clear filters</button>
+      <nav id="tag-filters" aria-label="active tag filters"></nav>
+    </div>
+  </div>
+</header>
+<main><div id="app" class="empty">Loading...</div></main>
+
+<script id="inlined-data" type="application/json">__INLINED_DATA__</script>
+<script>
+const DATA = JSON.parse(document.getElementById("inlined-data").textContent);
+const selected = new Set();       // active doc filters
+const selectedTags = new Set();   // active tag filters
+
+// theme toggle: default follows the system; a click sets an explicit override.
+(function () {
+  const root = document.documentElement;
+  const btn = document.getElementById("toggle");
+  try { const s = localStorage.getItem("theme"); if (s) root.dataset.theme = s; } catch (e) {}
+  const effective = () =>
+    root.dataset.theme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  function paint() {
+    const t = effective();
+    btn.textContent = t === "dark" ? "☾ Dark" : "☀ Light";
+    btn.setAttribute("aria-label", "Switch to " + (t === "dark" ? "light" : "dark") + " theme");
+  }
+  btn.addEventListener("click", () => {
+    const next = effective() === "dark" ? "light" : "dark";
+    root.dataset.theme = next;
+    try { localStorage.setItem("theme", next); } catch (e) {}
+    paint();
+  });
+  paint();
+})();
+
+function slug(s) { return s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
+function basename(p) { return p ? p.split("/").pop() : ""; }
+function esc(s) { const d = document.createElement("div"); d.textContent = s == null ? "" : s; return d.innerHTML; }
+
+function refLine(ref) {
+  const loc = ref.path ? `${basename(ref.path)}${ref.line != null ? ":" + ref.line : ""}` : "";
+  const label = `${esc(ref.repo)} #${esc(ref.pr_number)}${loc ? " — " + esc(loc) : ""}`;
+  const who = ref.author ? ` <span class="who">(${esc(ref.author)})</span>` : "";
+  return `<li><a href="${esc(ref.comment_url)}" target="_blank" rel="noopener">${label}</a>${who}</li>`;
+}
+
+function ruleHtml(r) {
+  const refs = r.references || [];
+  const n = refs.length;
+  const tags = r.tags || [];
+  const tagsHtml = tags.length
+    ? `<span class="tags">${tags.map(t => `<button class="tag${selectedTags.has(t) ? " active" : ""}" type="button" data-tag="${esc(t)}">${esc(t)}</button>`).join("")}</span><span class="sep">|</span>`
+    : "";
+  return `<div class="rule">
+    <div class="rule-name">${esc(r.name)}</div>
+    <div class="text">${r.body_html}</div>
+    <details class="refs"><summary>${tagsHtml}<span class="reflabel">${n} reference${n === 1 ? "" : "s"}</span></summary>
+      <ul>${refs.map(refLine).join("")}</ul></details>
+  </div>`;
+}
+
+// Group rules into .rule-category blocks: uncategorized first (no h3), then each
+// section as an <h3> header, in first-appearance order.
+function renderCategories(rules) {
+  const groups = new Map();
+  const order = [];
+  for (const r of rules) {
+    const key = r.section || "";
+    if (!groups.has(key)) { groups.set(key, []); order.push(key); }
+    groups.get(key).push(r);
+  }
+  const ordered = groups.has("") ? [""].concat(order.filter(k => k !== "")) : order;
+  return ordered.map(key => {
+    const header = key ? `<h2>${esc(key)}</h2>` : "";
+    return `<div class="rule-category">${header}${groups.get(key).map(ruleHtml).join("")}</div>`;
+  }).join("");
+}
+
+function textMatch(r, f) {
+  if (!f) return true;
+  if ((r.text || "").toLowerCase().includes(f)) return true;
+  if ((r.section || "").toLowerCase().includes(f)) return true;
+  return (r.references || []).some(x =>
+    [x.repo, x.author, x.path].some(v => (v || "").toString().toLowerCase().includes(f)));
+}
+
+function tagMatch(r) {
+  if (!selectedTags.size) return true;
+  return (r.tags || []).some(t => selectedTags.has(t));
+}
+
+function updateClear() {
+  document.getElementById("clear").hidden = selected.size === 0 && selectedTags.size === 0;
+}
+
+function renderTagFilters() {
+  document.getElementById("tag-filters").innerHTML =
+    [...selectedTags].sort().map(t => `<button class="chip active" type="button" data-tag="${esc(t)}">${esc(t)}</button>`).join("");
+}
+
+function toggleTag(tag) {
+  if (selectedTags.has(tag)) selectedTags.delete(tag);
+  else selectedTags.add(tag);
+  renderTagFilters();
+  updateClear();
+  render();
+}
+
+function buildChips() {
+  const nav = document.getElementById("filters");
+  nav.innerHTML = DATA.docs
+    .map(d => `<button class="chip" data-id="${slug(d.title)}">${esc(d.title)}</button>`).join("");
+  nav.addEventListener("click", e => {
+    const b = e.target.closest(".chip"); if (!b) return;
+    const id = b.dataset.id;
+    if (selected.has(id)) { selected.delete(id); b.classList.remove("active"); }
+    else { selected.add(id); b.classList.add("active"); }
+    updateClear();
+    render();
+  });
+  document.getElementById("clear").addEventListener("click", () => {
+    selected.clear();
+    selectedTags.clear();
+    nav.querySelectorAll(".chip.active").forEach(c => c.classList.remove("active"));
+    renderTagFilters();
+    updateClear();
+    render();
+  });
+}
+
+function render() {
+  const f = document.getElementById("q").value.trim().toLowerCase();
+  const parts = [];
+  for (const doc of DATA.docs) {
+    if (selected.size && !selected.has(slug(doc.title))) continue;
+    const rules = doc.rules.filter(r => textMatch(r, f) && tagMatch(r));
+    if (!rules.length) continue;
+    parts.push(`<section class="doc peek" data-id="${slug(doc.title)}">
+      <div class="doc-head"><span class="doc-caret"></span>${esc(doc.title)}
+        <span class="count">${rules.length} rules</span></div>
+      <div class="doc-body">${renderCategories(rules)}<div class="peek-fade"></div></div>
+    </section>`);
+  }
+  const app = document.getElementById("app");
+  app.className = parts.length ? "" : "empty";
+  app.innerHTML = parts.length ? parts.join("") : "No rules match the current filters.";
+  applyPeek();
+}
+
+function applyPeek() {
+  document.querySelectorAll(".doc").forEach(doc => {
+    if (doc.classList.contains("open")) return;
+    const body = doc.querySelector(".doc-body");
+    doc.classList.toggle("nopeek", body.scrollHeight <= 204);
+  });
+}
+
+(function () {
+  window.__DATA__ = DATA;
+  document.getElementById("genmeta").textContent =
+    `${DATA.docs.length} docs · ${DATA.docs.reduce((n, d) => n + d.rules.length, 0)} rules`;
+  buildChips();
+  const app = document.getElementById("app");
+  app.addEventListener("click", e => {
+    const tagBtn = e.target.closest(".tag[data-tag]");   // footer tag: toggle a tag filter
+    if (tagBtn) { e.preventDefault(); toggleTag(tagBtn.dataset.tag); return; }
+    const fade = e.target.closest(".peek-fade");
+    if (fade) { const d = fade.closest(".doc"); d.classList.remove("peek"); d.classList.add("open"); return; }
+    const head = e.target.closest(".doc-head");
+    if (head) { const d = head.closest(".doc"); d.classList.toggle("open"); d.classList.toggle("peek"); applyPeek(); return; }
+  });
+  document.getElementById("tag-filters").addEventListener("click", e => {
+    const b = e.target.closest(".chip[data-tag]"); if (!b) return;   // active tag chip: toggle off
+    toggleTag(b.dataset.tag);
+  });
+  window.addEventListener("resize", applyPeek);
+  document.getElementById("q").addEventListener("input", render);
+  render();
+})();
+</script>
+</body>
+</html>
