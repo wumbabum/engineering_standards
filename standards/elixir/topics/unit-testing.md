@@ -142,9 +142,25 @@ functions not under test.
 
 #### Configure Mox Once
 
-Configure **Mox** once at the top of the module with `setup :set_mox_from_context` and
-`setup :verify_on_exit!` so expectations are verified on exit. Rely on `verify_on_exit!`
-rather than adding unnecessary expectations.
+Configure **Mox** once at the top of the test module, and always include both setup
+callbacks:
+
+```elixir
+setup :set_mox_from_context
+setup :verify_on_exit!
+```
+
+- `setup :verify_on_exit!` is not optional. It is what fails a test when an `expect/3` is
+  never called, so it is the callback that gives the mock its teeth. Rely on it rather than
+  adding unnecessary expectations just to prove a call happened.
+- `setup :set_mox_from_context` is a safeguard to include anyway, even when a test passes
+  without it. It reads the test's `async` context to run **Mox** in private or global mode,
+  so a mock defined in the test still applies when the code under test calls it from another
+  process. Adding it by default avoids a confusing failure later when the code moves work
+  off the test process.
+
+List the two `setup` lines together at the top of the module so every test in it inherits
+them, rather than repeating the configuration per test or per `describe`.
 
 #### Assert On Mocked Arguments
 

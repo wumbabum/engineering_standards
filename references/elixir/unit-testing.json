@@ -1284,6 +1284,15 @@
           "path": "apps/web/test/support/authentication_helpers.ex",
           "line": 8,
           "created_at": "2025-11-12T22:02:03Z"
+        },
+        {
+          "comment_url": "https://github.com/CityBaseInc/schedule_service/pull/436#discussion_r4158649476",
+          "repo": "schedule_service",
+          "pr_number": 436,
+          "author": "jdfrens",
+          "path": "apps/api/test/api/email_api_test.exs",
+          "line": 11,
+          "created_at": "2026-10-01T17:53:44Z"
         }
       ]
     },
